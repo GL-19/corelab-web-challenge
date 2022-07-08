@@ -9,7 +9,12 @@ interface ICard {
 
 const Card = ({ title, children, color }: ICard) => {
 	return (
-		<div className={styles.Card} style={{ backgroundColor: color ? color : "inherit" }}>
+		<div
+			className={styles.Card}
+			style={{
+				backgroundColor: color ? color : "inherit",
+			}}
+		>
 			<h2>{title}</h2>
 
 			<div className={styles.content}>{children}</div>
