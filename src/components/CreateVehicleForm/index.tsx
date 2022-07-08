@@ -1,23 +1,39 @@
 import { FormEvent, useState } from "react";
+import { ICreateVehicleDTO } from "../../types";
 import styles from "./CreateVehicleForm.module.scss";
 
-interface ICreateVehicleForm {
-	onSubmit: () => void;
+interface CreateVehicleFormProps {
+	initialData?: ICreateVehicleDTO;
+	onSubmit: (data: ICreateVehicleDTO) => void;
 }
 
-const CreateVehicleForm = ({ onSubmit }: ICreateVehicleForm) => {
-	const [name, setName] = useState("");
-	const [brand, setBrand] = useState("");
-	const [description, setDescription] = useState("");
-	const [color, setColor] = useState("");
-	const [plate, setPlate] = useState("");
-	const [year, setYear] = useState(1955);
-	const [price, setPrice] = useState(0);
+const CreateVehicleForm = ({ onSubmit, initialData }: CreateVehicleFormProps) => {
+	const [name, setName] = useState(() => initialData?.name || "");
+	const [brand, setBrand] = useState(() => initialData?.brand || "");
+	const [description, setDescription] = useState(() => initialData?.description || "");
+	const [color, setColor] = useState(() => initialData?.color || "");
+	const [plate, setPlate] = useState(() => initialData?.plate || "");
+	const [year, setYear] = useState(() => initialData?.year || 2000);
+	const [price, setPrice] = useState(() => initialData?.price || 0);
 
 	function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 
-		onSubmit();
+		const data: ICreateVehicleDTO = {
+			name,
+			brand,
+			description,
+			color,
+			plate,
+			price,
+			year,
+		};
+
+		try {
+			onSubmit(data);
+		} catch (e) {
+			console.log(e);
+		}
 	}
 
 	return (

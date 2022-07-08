@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { getVehicles } from "../../lib/api";
 import { Button, Card, Search } from "../../components";
 import styles from "./Vehicles.module.scss";
-import { IVehicle } from "../../types/Vehicle";
+import { IVehicle } from "../../types";
 
 const VehiclesPage = () => {
 	const [vehicles, setVehicles] = useState<IVehicle[]>([]);
@@ -10,8 +10,8 @@ const VehiclesPage = () => {
 
 	useEffect(() => {
 		const fetchVehicles = async () => {
-			const payload = await getVehicles(search);
-			setVehicles(payload);
+			const { data } = await getVehicles(search);
+			setVehicles(data);
 		};
 
 		fetchVehicles();
