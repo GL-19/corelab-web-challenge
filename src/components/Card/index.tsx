@@ -1,19 +1,20 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import styles from "./Card.module.scss";
 
 interface ICard {
-  title: string;
-  children: ReactNode;
+	title: string;
+	children: ReactNode;
+	color?: string;
 }
 
-const Card = (props: ICard) => {
-  return (
-    <div className={styles.Card}>
-      <h2>{props.title}</h2>
+const Card = ({ title, children, color }: ICard) => {
+	return (
+		<div className={styles.Card} style={{ backgroundColor: color ? color : "inherit" }}>
+			<h2>{title}</h2>
 
-      <div className={styles.content}>{props.children}</div>
-    </div>
-  );
+			<div className={styles.content}>{children}</div>
+		</div>
+	);
 };
 
 export default Card;

@@ -5,35 +5,40 @@ import styles from "./Vehicles.module.scss";
 import { IVehicle } from "../../types/Vehicle";
 
 const VehiclesPage = () => {
-  const [vehicles, setVehicles] = useState<IVehicle[]>([]);
-  const [search, setSearch] = useState<string>("");
+	const [vehicles, setVehicles] = useState<IVehicle[]>([]);
+	const [search, setSearch] = useState<string>("");
 
-  useEffect(() => {
-    const fetchVehicles = async () => {
-      const payload = await getVehicles();
-      setVehicles(payload);
-    };
+	useEffect(() => {
+		const fetchVehicles = async () => {
+			const payload = await getVehicles();
+			console.log("payload", payload);
+			setVehicles(payload);
+		};
 
-    fetchVehicles();
-  }, []);
+		fetchVehicles();
+	}, []);
 
-  console.log({ vehicles });
+	console.log({ vehicles });
 
-  return (
-    <div className={styles.Vehicles}>
-      <main className={styles.main}>
-        <Search placeholder="Search" value={search} onChange={() => {}} />
+	return (
+		<div className={styles.Vehicles}>
+			<main className={styles.main}>
+				<Search placeholder="Search" value={search} onChange={() => {}} />
 
-        <Button text="Add new vehicle" onClick={() => {}} />
+				<Button text="Add new vehicle" onClick={() => {}} />
 
-        <Card title="Sandero Stepway">
-          <p>Price: 22000</p>
-          <p>Description: Carro usado por 2 anos...</p>
-          <p>Year: 2018</p>
-        </Card>
-      </main>
-    </div>
-  );
+				<div>
+					{vehicles.map((vehicle) => (
+						<Card key={vehicle.id} title={vehicle.name} color={vehicle.color}>
+							<p>Price: {vehicle.price}</p>
+							<p>Description: {vehicle.description}</p>
+							<p>Year: {vehicle.year} </p>
+						</Card>
+					))}
+				</div>
+			</main>
+		</div>
+	);
 };
 
 export default VehiclesPage;
