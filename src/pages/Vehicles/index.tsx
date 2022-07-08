@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { getVehicles } from "../../lib/api";
 import { Button, Card, Search } from "../../components";
 import styles from "./Vehicles.module.scss";
@@ -10,20 +10,23 @@ const VehiclesPage = () => {
 
 	useEffect(() => {
 		const fetchVehicles = async () => {
-			const payload = await getVehicles();
-			console.log("payload", payload);
+			const payload = await getVehicles(search);
 			setVehicles(payload);
 		};
 
 		fetchVehicles();
-	}, []);
+	}, [search]);
 
-	console.log({ vehicles });
+	function handleSearch(event: ChangeEvent<HTMLInputElement>): void {
+		event.preventDefault();
+
+		setSearch(event.target.value);
+	}
 
 	return (
 		<div className={styles.Vehicles}>
 			<main className={styles.main}>
-				<Search placeholder="Search" value={search} onChange={() => {}} />
+				<Search placeholder="Search" value={search} onChange={handleSearch} />
 
 				<Button text="Add new vehicle" onClick={() => {}} />
 
