@@ -1,17 +1,18 @@
-import { CreateVehicleForm } from "../../components";
+import { FilterOptionsForm } from "../../components";
+
 import { useVehicles } from "../../providers/VehiclesProvider";
 import styles from "./CreateVehicle.module.scss";
 
-function CreateVehicle() {
-	const { handleCreateVehicle } = useVehicles();
+function UpdateVehicle() {
+	const { handleUpdateFilterOptions } = useVehicles();
 
 	return (
 		<div className={styles.CreateVehicle}>
 			<main className={styles.main}>
-				<CreateVehicleForm onSubmit={handleCreateVehicle} />
+				<FilterOptionsForm onSubmit={handleUpdateFilterOptions} />
 			</main>
 		</div>
 	);
 }
 
-export default CreateVehicle;
+export default UpdateVehicle;

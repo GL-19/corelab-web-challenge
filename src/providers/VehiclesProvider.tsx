@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { getVehicles } from "../lib/api";
-import { IFilterOptions, IVehicle } from "../types";
+import { useNavigate } from "react-router-dom";
+import { createVehicle, getVehicles } from "../lib/api";
+import { IFilterOptions, ICreateVehicleDTO, IVehicle } from "../types";
 
 interface VehiclesContextData {
 	filterOptions: IFilterOptions;
@@ -8,6 +9,7 @@ interface VehiclesContextData {
 	vehicles: IVehicle[];
 	handleUpdateFilterOptions: (filterOptions: IFilterOptions) => void;
 	handleChangeSearch: (search: string) => void;
+	handleCreateVehicle: (CreateVehicleData: ICreateVehicleDTO) => Promise<void>;
 }
 
 interface VehiclesProviderProps {
@@ -17,6 +19,8 @@ interface VehiclesProviderProps {
 const VehiclesContext = createContext<VehiclesContextData>({} as VehiclesContextData);
 
 export function VehiclesProvider({ children }: VehiclesProviderProps) {
+	const navigate = useNavigate();
+
 	const [search, setSearch] = useState<string>("");
 	const [vehicles, setVehicles] = useState<IVehicle[]>([]);
 	const [filterOptions, setFilterOptions] = useState<IFilterOptions>({
@@ -44,6 +48,18 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 		setSearch(search);
 	}
 
+	async function handleCreateVehicle(
+		CreateVehicleData: ICreateVehicleDTO
+	): Promise<void> {
+		await createVehicle(CreateVehicleData);
+
+		const { data } = await getVehicles(search, filterOptions);
+
+		setVehicles(data);
+
+		navigate("/");
+	}
+
 	return (
 		<VehiclesContext.Provider
 			value={{
@@ -52,6 +68,7 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 				vehicles,
 				handleUpdateFilterOptions,
 				handleChangeSearch,
+				handleCreateVehicle,
 			}}
 		>
 			{children}

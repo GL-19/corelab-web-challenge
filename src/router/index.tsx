@@ -1,15 +1,14 @@
-import { Routes, BrowserRouter, Route } from "react-router-dom";
-import { CreateVehicle, VehiclesPage } from "../pages";
+import { Routes, Route } from "react-router-dom";
+import { CreateVehicle, UpdateVehicle, VehiclesPage } from "../pages";
 
-function Router() {
+function RoutesComponent() {
 	return (
-		<BrowserRouter>
-			<Routes>
-				<Route path="/" element={<VehiclesPage />}></Route>
-				<Route path="/create" element={<CreateVehicle />}></Route>
-			</Routes>
-		</BrowserRouter>
+		<Routes>
+			<Route path="/" element={<VehiclesPage />}></Route>
+			<Route path="/create" element={<CreateVehicle />}></Route>
+			<Route path="/:id/update" element={<UpdateVehicle />}></Route>
+		</Routes>
 	);
 }
 
-export { Router };
+export { RoutesComponent as Routes };
