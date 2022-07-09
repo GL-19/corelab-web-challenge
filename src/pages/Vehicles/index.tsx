@@ -1,34 +1,26 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import { getVehicles } from "../../lib/api";
+import { ChangeEvent } from "react";
+
+import { useVehicles } from "../../providers/VehiclesProvider";
 import { Button, Card, Search } from "../../components";
 import styles from "./Vehicles.module.scss";
-import { IVehicle } from "../../types";
+import { useNavigate } from "react-router-dom";
 
 const VehiclesPage = () => {
-	const [vehicles, setVehicles] = useState<IVehicle[]>([]);
-	const [search, setSearch] = useState<string>("");
+	const { search, handleChangeSearch, vehicles } = useVehicles();
+	const navigate = useNavigate();
 
-	useEffect(() => {
-		const fetchVehicles = async () => {
-			const { data } = await getVehicles(search);
-			setVehicles(data);
-		};
-
-		fetchVehicles();
-	}, [search]);
-
-	function handleSearch(event: ChangeEvent<HTMLInputElement>): void {
+	function handleOnChange(event: ChangeEvent<HTMLInputElement>): void {
 		event.preventDefault();
 
-		setSearch(event.target.value);
+		handleChangeSearch(event.target.value);
 	}
 
 	return (
 		<div className={styles.Vehicles}>
 			<main className={styles.main}>
-				<Search placeholder="Search" value={search} onChange={handleSearch} />
+				<Search placeholder="Search" value={search} onChange={handleOnChange} />
 
-				<Button text="Add new vehicle" onClick={() => {}} />
+				<Button text="Add new vehicle" onClick={() => navigate("/create")} />
 
 				<div>
 					{vehicles.map((vehicle) => (

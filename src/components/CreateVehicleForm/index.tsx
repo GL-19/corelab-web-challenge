@@ -31,8 +31,8 @@ const CreateVehicleForm = ({ onSubmit, initialData }: CreateVehicleFormProps) =>
 
 		try {
 			onSubmit(data);
-		} catch (e) {
-			console.log(e);
+		} catch (error) {
+			console.log(error);
 		}
 	}
 

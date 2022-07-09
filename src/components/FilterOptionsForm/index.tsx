@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
 import { IFilterOptions } from "../../types";
 
-import styles from "./CreateVehicleForm.module.scss";
+import styles from "./FilterOptionsForm.module.scss";
 
 interface FilterOptionsFormProps {
 	onSubmit: (data: IFilterOptions) => void;
@@ -10,7 +10,7 @@ interface FilterOptionsFormProps {
 const FilterOptionsForm = ({ onSubmit }: FilterOptionsFormProps) => {
 	const [brand, setBrand] = useState("");
 	const [color, setColor] = useState("");
-	const [year, setYear] = useState(2000);
+	const [year, setYear] = useState(0);
 	const [maxPrice, setMaxPrice] = useState(0);
 	const [minPrice, setMinPrice] = useState(0);
 
@@ -21,7 +21,7 @@ const FilterOptionsForm = ({ onSubmit }: FilterOptionsFormProps) => {
 	}
 
 	return (
-		<form className={styles.CreateVehicleForm} action="submit" onSubmit={handleSubmit}>
+		<form className={styles.FilterOptionsForm} action="submit" onSubmit={handleSubmit}>
 			<label htmlFor="Marca">Marca:</label>
 			<input
 				type="text"
@@ -41,8 +41,6 @@ const FilterOptionsForm = ({ onSubmit }: FilterOptionsFormProps) => {
 			<label htmlFor="Ano">Ano:</label>
 			<input
 				type="number"
-				min="1955"
-				max="2025"
 				id="Ano"
 				value={year.toString()}
 				onChange={(event) => setYear(Number(event.target.value))}

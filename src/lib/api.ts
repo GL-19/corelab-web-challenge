@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { ICreateVehicleDTO, IVehicle } from "../types";
+import { ICreateVehicleDTO, IFilterOptions, IVehicle } from "../types";
 
 const baseURL = "http://localhost:3333";
 
@@ -7,10 +7,16 @@ const api = axios.create({
 	baseURL: baseURL,
 });
 
-export async function getVehicles(searchString: string): Promise<AxiosResponse> {
-	const response = await api.get(
-		`/vehicles?${searchString ? `searchString=${searchString}` : ""}`
-	);
+export async function getVehicles(
+	searchString: string = "",
+	filterOptions?: IFilterOptions
+): Promise<AxiosResponse> {
+	const response = await api.get(`/vehicles`, {
+		params: {
+			searchString,
+			...filterOptions,
+		},
+	});
 
 	return response;
 }
