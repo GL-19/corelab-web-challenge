@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { VehicleForm } from "../../components";
 import { getVehicle } from "../../lib/api";
 
@@ -8,19 +8,25 @@ import { IVehicle } from "../../types";
 import styles from "./UpdateVehicle.module.scss";
 
 export function UpdateVehicle() {
-	const [vehicle, setVehicle] = useState<IVehicle | null>(null);
-	const { handleUpdateVehicle } = useVehicles();
 	const { id } = useParams();
+	const navigate = useNavigate();
+
+	const { handleUpdateVehicle } = useVehicles();
+	const [vehicle, setVehicle] = useState<IVehicle | null>(null);
 
 	useEffect(() => {
 		async function fetchVehicle() {
-			const response = await getVehicle(Number(id));
+			try {
+				const { data } = await getVehicle(Number(id));
 
-			setVehicle(response);
+				setVehicle(data);
+			} catch {
+				navigate("/");
+			}
 		}
 
 		fetchVehicle();
-	}, [id]);
+	}, [id, navigate]);
 
 	return (
 		<div className={styles.UpdateVehicle}>
