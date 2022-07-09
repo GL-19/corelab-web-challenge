@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { CreateVehicle, UpdateVehicle, VehiclesPage } from "../pages";
+import { CreateVehicle, FilterOptions, UpdateVehicle, VehiclesPage } from "../pages";
 
 function RoutesComponent() {
 	return (
@@ -7,6 +7,7 @@ function RoutesComponent() {
 			<Route path="/" element={<VehiclesPage />}></Route>
 			<Route path="/create" element={<CreateVehicle />}></Route>
 			<Route path="/:id/update" element={<UpdateVehicle />}></Route>
+			<Route path="/filter-options" element={<FilterOptions />}></Route>
 		</Routes>
 	);
 }

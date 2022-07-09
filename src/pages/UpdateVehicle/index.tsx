@@ -1,15 +1,38 @@
-import { FilterOptionsForm } from "../../components";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { CreateVehicleForm } from "../../components";
+import { getVehicle } from "../../lib/api";
 
 import { useVehicles } from "../../providers/VehiclesProvider";
-import styles from "./CreateVehicle.module.scss";
+import { IVehicle } from "../../types";
+import styles from "./UpdateVehicle.module.scss";
 
-function UpdateVehicle() {
-	const { handleUpdateFilterOptions } = useVehicles();
+export function UpdateVehicle() {
+	const [vehicle, setVehicle] = useState<IVehicle | null>(null);
+	const { handleUpdateVehicle } = useVehicles();
+	const { id } = useParams();
+
+	useEffect(() => {
+		async function fetchVehicle() {
+			const response = await getVehicle(Number(id));
+
+			setVehicle(response);
+		}
+
+		fetchVehicle();
+	}, [id]);
 
 	return (
-		<div className={styles.CreateVehicle}>
+		<div className={styles.UpdateVehicle}>
 			<main className={styles.main}>
-				<FilterOptionsForm onSubmit={handleUpdateFilterOptions} />
+				{vehicle && (
+					<CreateVehicleForm
+						onSubmit={handleUpdateVehicle}
+						vehicleData={{
+							...vehicle,
+						}}
+					/>
+				)}
 			</main>
 		</div>
 	);

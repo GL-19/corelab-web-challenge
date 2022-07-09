@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createVehicle, getVehicles } from "../lib/api";
+import { createVehicle, deleteVehicle, getVehicles, updateVehicle } from "../lib/api";
 import { IFilterOptions, ICreateVehicleDTO, IVehicle } from "../types";
 
 interface VehiclesContextData {
@@ -10,6 +10,8 @@ interface VehiclesContextData {
 	handleUpdateFilterOptions: (filterOptions: IFilterOptions) => void;
 	handleChangeSearch: (search: string) => void;
 	handleCreateVehicle: (CreateVehicleData: ICreateVehicleDTO) => Promise<void>;
+	handleUpdateVehicle: (UpdateVehicleData: ICreateVehicleDTO) => Promise<void>;
+	handleDeleteVehicle: (id: number) => Promise<void>;
 }
 
 interface VehiclesProviderProps {
@@ -42,6 +44,8 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 
 	function handleUpdateFilterOptions(filterOptions: IFilterOptions): void {
 		setFilterOptions(filterOptions);
+
+		navigate("/");
 	}
 
 	function handleChangeSearch(search: string): void {
@@ -60,6 +64,30 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 		navigate("/");
 	}
 
+	async function handleUpdateVehicle(
+		CreateVehicleData: ICreateVehicleDTO
+	): Promise<void> {
+		if (CreateVehicleData.id) {
+			await updateVehicle(CreateVehicleData, CreateVehicleData.id);
+		} else {
+			console.log("Id not informed!");
+		}
+
+		const { data } = await getVehicles(search, filterOptions);
+
+		setVehicles(data);
+
+		navigate("/");
+	}
+
+	async function handleDeleteVehicle(id: number): Promise<void> {
+		await deleteVehicle(id);
+
+		const { data } = await getVehicles(search, filterOptions);
+
+		setVehicles(data);
+	}
+
 	return (
 		<VehiclesContext.Provider
 			value={{
@@ -69,6 +97,8 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 				handleUpdateFilterOptions,
 				handleChangeSearch,
 				handleCreateVehicle,
+				handleDeleteVehicle,
+				handleUpdateVehicle,
 			}}
 		>
 			{children}

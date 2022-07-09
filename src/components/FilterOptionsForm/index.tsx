@@ -1,4 +1,5 @@
 import { FormEvent, useState } from "react";
+import { useVehicles } from "../../providers/VehiclesProvider";
 import { IFilterOptions } from "../../types";
 
 import styles from "./FilterOptionsForm.module.scss";
@@ -8,11 +9,13 @@ interface FilterOptionsFormProps {
 }
 
 const FilterOptionsForm = ({ onSubmit }: FilterOptionsFormProps) => {
-	const [brand, setBrand] = useState("");
-	const [color, setColor] = useState("");
-	const [year, setYear] = useState(0);
-	const [maxPrice, setMaxPrice] = useState(0);
-	const [minPrice, setMinPrice] = useState(0);
+	const { filterOptions } = useVehicles();
+
+	const [brand, setBrand] = useState(filterOptions.brand);
+	const [color, setColor] = useState(filterOptions.color);
+	const [year, setYear] = useState(filterOptions.year);
+	const [maxPrice, setMaxPrice] = useState(filterOptions.maxPrice);
+	const [minPrice, setMinPrice] = useState(filterOptions.minPrice);
 
 	function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();

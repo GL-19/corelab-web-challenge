@@ -1,21 +1,33 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
-import { ICreateVehicleDTO } from "../../types";
+import { ICreateVehicleDTO, IVehicle } from "../../types";
 import styles from "./CreateVehicleForm.module.scss";
 
 interface CreateVehicleFormProps {
-	initialData?: ICreateVehicleDTO;
+	vehicleData?: IVehicle;
 	onSubmit: (data: ICreateVehicleDTO) => void;
 }
 
-const CreateVehicleForm = ({ onSubmit, initialData }: CreateVehicleFormProps) => {
-	const [name, setName] = useState(() => initialData?.name || "");
-	const [brand, setBrand] = useState(() => initialData?.brand || "");
-	const [description, setDescription] = useState(() => initialData?.description || "");
-	const [color, setColor] = useState(() => initialData?.color || "");
-	const [plate, setPlate] = useState(() => initialData?.plate || "");
-	const [year, setYear] = useState(() => initialData?.year || 2000);
-	const [price, setPrice] = useState(() => initialData?.price || 0);
+const CreateVehicleForm = ({ onSubmit, vehicleData }: CreateVehicleFormProps) => {
+	const [name, setName] = useState("");
+	const [brand, setBrand] = useState("");
+	const [description, setDescription] = useState("");
+	const [color, setColor] = useState("");
+	const [plate, setPlate] = useState("");
+	const [year, setYear] = useState(2000);
+	const [price, setPrice] = useState(0);
+
+	useEffect(() => {
+		if (vehicleData) {
+			setName(vehicleData?.name);
+			setBrand(vehicleData?.brand);
+			setDescription(vehicleData?.description);
+			setColor(vehicleData?.color);
+			setPlate(vehicleData?.plate);
+			setYear(vehicleData?.year);
+			setPrice(vehicleData?.price);
+		}
+	}, [vehicleData]);
 
 	function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
@@ -30,8 +42,16 @@ const CreateVehicleForm = ({ onSubmit, initialData }: CreateVehicleFormProps) =>
 			year,
 		};
 
+		if (vehicleData?.id) {
+			data.id = vehicleData.id;
+		}
+
 		try {
-			onSubmit(data);
+			if (vehicleData) {
+				onSubmit(data);
+			} else {
+				onSubmit(data);
+			}
 		} catch (error) {
 			console.log(error);
 		}
