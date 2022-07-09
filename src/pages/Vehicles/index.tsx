@@ -1,24 +1,16 @@
-import { ChangeEvent } from "react";
-
 import { useVehicles } from "../../providers/VehiclesProvider";
-import { Button, Card, Search } from "../../components";
+import { Button, Card, SearchForm } from "../../components";
 import styles from "./Vehicles.module.scss";
 import { useNavigate } from "react-router-dom";
 
 const VehiclesPage = () => {
-	const { search, vehicles, handleChangeSearch, handleDeleteVehicle } = useVehicles();
+	const { search, vehicles, handleSearch, handleDeleteVehicle } = useVehicles();
 	const navigate = useNavigate();
-
-	function handleOnChange(event: ChangeEvent<HTMLInputElement>): void {
-		event.preventDefault();
-
-		handleChangeSearch(event.target.value);
-	}
 
 	return (
 		<div className={styles.Vehicles}>
 			<main className={styles.main}>
-				<Search placeholder="Search" value={search} onChange={handleOnChange} />
+				<SearchForm placeholder="Search" value={search} onSubmit={handleSearch} />
 
 				<Button text="Filter Options" onClick={() => navigate("/filter-options")} />
 				<Button text="Add new vehicle" onClick={() => navigate("/create")} />

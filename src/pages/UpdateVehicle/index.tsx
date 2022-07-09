@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { CreateVehicleForm } from "../../components";
+import { VehicleForm } from "../../components";
 import { getVehicle } from "../../lib/api";
 
 import { useVehicles } from "../../providers/VehiclesProvider";
@@ -26,9 +26,9 @@ export function UpdateVehicle() {
 		<div className={styles.UpdateVehicle}>
 			<main className={styles.main}>
 				{vehicle && (
-					<CreateVehicleForm
+					<VehicleForm
 						onSubmit={handleUpdateVehicle}
-						vehicleData={{
+						vehicleFormData={{
 							...vehicle,
 						}}
 					/>

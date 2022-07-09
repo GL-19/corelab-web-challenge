@@ -1,4 +1,4 @@
-export interface ICreateVehicleDTO {
+export interface IVehicleFormData {
 	id?: number;
 	name: string;
 	brand: string;

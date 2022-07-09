@@ -1,16 +1,16 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createVehicle, deleteVehicle, getVehicles, updateVehicle } from "../lib/api";
-import { IFilterOptions, ICreateVehicleDTO, IVehicle } from "../types";
+import { IFilterOptions, IVehicleFormData, IVehicle } from "../types";
 
 interface VehiclesContextData {
 	filterOptions: IFilterOptions;
 	search: string;
 	vehicles: IVehicle[];
+	handleSearch: (search: string) => void;
 	handleUpdateFilterOptions: (filterOptions: IFilterOptions) => void;
-	handleChangeSearch: (search: string) => void;
-	handleCreateVehicle: (CreateVehicleData: ICreateVehicleDTO) => Promise<void>;
-	handleUpdateVehicle: (UpdateVehicleData: ICreateVehicleDTO) => Promise<void>;
+	handleCreateVehicle: (CreateVehicleData: IVehicleFormData) => Promise<void>;
+	handleUpdateVehicle: (UpdateVehicleData: IVehicleFormData) => Promise<void>;
 	handleDeleteVehicle: (id: number) => Promise<void>;
 }
 
@@ -48,13 +48,11 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 		navigate("/");
 	}
 
-	function handleChangeSearch(search: string): void {
+	function handleSearch(search: string): void {
 		setSearch(search);
 	}
 
-	async function handleCreateVehicle(
-		CreateVehicleData: ICreateVehicleDTO
-	): Promise<void> {
+	async function handleCreateVehicle(CreateVehicleData: IVehicleFormData): Promise<void> {
 		await createVehicle(CreateVehicleData);
 
 		const { data } = await getVehicles(search, filterOptions);
@@ -64,9 +62,7 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 		navigate("/");
 	}
 
-	async function handleUpdateVehicle(
-		CreateVehicleData: ICreateVehicleDTO
-	): Promise<void> {
+	async function handleUpdateVehicle(CreateVehicleData: IVehicleFormData): Promise<void> {
 		if (CreateVehicleData.id) {
 			await updateVehicle(CreateVehicleData, CreateVehicleData.id);
 		} else {
@@ -95,7 +91,7 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 				search,
 				vehicles,
 				handleUpdateFilterOptions,
-				handleChangeSearch,
+				handleSearch,
 				handleCreateVehicle,
 				handleDeleteVehicle,
 				handleUpdateVehicle,

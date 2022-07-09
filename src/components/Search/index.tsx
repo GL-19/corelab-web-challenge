@@ -1,15 +1,31 @@
-import { ChangeEvent } from "react";
+import { FormEvent, useState } from "react";
 
 interface ISearch {
 	placeholder: string;
 	value: string;
-	onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+	onSubmit: (input: string) => void;
 }
 
-const Search = ({ placeholder, value, onChange }: ISearch) => {
+const SearchForm = ({ placeholder, onSubmit }: ISearch) => {
+	const [input, setInput] = useState("");
+
+	function handleSubmit(event: FormEvent<HTMLFormElement>) {
+		event.preventDefault();
+
+		onSubmit(input);
+	}
+
 	return (
-		<input type="text" placeholder={placeholder} value={value} onChange={onChange} />
+		<form action="submit" onSubmit={handleSubmit}>
+			<button type="submit">Submit</button>
+			<input
+				type="text"
+				placeholder="Search"
+				value={input}
+				onChange={(event) => setInput(event.target.value)}
+			/>
+		</form>
 	);
 };
 
-export default Search;
+export default SearchForm;

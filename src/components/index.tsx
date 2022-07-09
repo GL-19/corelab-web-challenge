@@ -1,7 +1,7 @@
 import Button from "./Button";
 import Card from "./Card";
-import Search from "./Search";
-import CreateVehicleForm from "./CreateVehicleForm";
+import SearchForm from "./Search";
+import VehicleForm from "./VehicleForm";
 import FilterOptionsForm from "./FilterOptionsForm";
 
-export { Button, Card, Search, CreateVehicleForm, FilterOptionsForm };
+export { Button, Card, SearchForm, VehicleForm, FilterOptionsForm };

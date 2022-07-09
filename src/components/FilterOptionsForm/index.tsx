@@ -1,15 +1,10 @@
 import { FormEvent, useState } from "react";
 import { useVehicles } from "../../providers/VehiclesProvider";
-import { IFilterOptions } from "../../types";
 
 import styles from "./FilterOptionsForm.module.scss";
 
-interface FilterOptionsFormProps {
-	onSubmit: (data: IFilterOptions) => void;
-}
-
-const FilterOptionsForm = ({ onSubmit }: FilterOptionsFormProps) => {
-	const { filterOptions } = useVehicles();
+const FilterOptionsForm = () => {
+	const { filterOptions, handleUpdateFilterOptions } = useVehicles();
 
 	const [brand, setBrand] = useState(filterOptions.brand);
 	const [color, setColor] = useState(filterOptions.color);
@@ -20,7 +15,7 @@ const FilterOptionsForm = ({ onSubmit }: FilterOptionsFormProps) => {
 	function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 
-		onSubmit({ brand, color, year, maxPrice, minPrice });
+		handleUpdateFilterOptions({ brand, color, year, maxPrice, minPrice });
 	}
 
 	return (

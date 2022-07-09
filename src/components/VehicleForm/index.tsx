@@ -1,14 +1,14 @@
 import { FormEvent, useEffect, useState } from "react";
 
-import { ICreateVehicleDTO, IVehicle } from "../../types";
-import styles from "./CreateVehicleForm.module.scss";
+import { IVehicleFormData } from "../../types";
+import styles from "./VehicleForm.module.scss";
 
-interface CreateVehicleFormProps {
-	vehicleData?: IVehicle;
-	onSubmit: (data: ICreateVehicleDTO) => void;
+interface VehicleFormProps {
+	vehicleFormData?: IVehicleFormData;
+	onSubmit: (data: IVehicleFormData) => void;
 }
 
-const CreateVehicleForm = ({ onSubmit, vehicleData }: CreateVehicleFormProps) => {
+const VehicleForm = ({ onSubmit, vehicleFormData }: VehicleFormProps) => {
 	const [name, setName] = useState("");
 	const [brand, setBrand] = useState("");
 	const [description, setDescription] = useState("");
@@ -18,21 +18,21 @@ const CreateVehicleForm = ({ onSubmit, vehicleData }: CreateVehicleFormProps) =>
 	const [price, setPrice] = useState(0);
 
 	useEffect(() => {
-		if (vehicleData) {
-			setName(vehicleData?.name);
-			setBrand(vehicleData?.brand);
-			setDescription(vehicleData?.description);
-			setColor(vehicleData?.color);
-			setPlate(vehicleData?.plate);
-			setYear(vehicleData?.year);
-			setPrice(vehicleData?.price);
+		if (vehicleFormData) {
+			setName(vehicleFormData?.name);
+			setBrand(vehicleFormData?.brand);
+			setDescription(vehicleFormData?.description);
+			setColor(vehicleFormData?.color);
+			setPlate(vehicleFormData?.plate);
+			setYear(vehicleFormData?.year);
+			setPrice(vehicleFormData?.price);
 		}
-	}, [vehicleData]);
+	}, [vehicleFormData]);
 
 	function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 
-		const data: ICreateVehicleDTO = {
+		const data: IVehicleFormData = {
 			name,
 			brand,
 			description,
@@ -42,23 +42,19 @@ const CreateVehicleForm = ({ onSubmit, vehicleData }: CreateVehicleFormProps) =>
 			year,
 		};
 
-		if (vehicleData?.id) {
-			data.id = vehicleData.id;
+		if (vehicleFormData?.id) {
+			data.id = vehicleFormData.id;
 		}
 
 		try {
-			if (vehicleData) {
-				onSubmit(data);
-			} else {
-				onSubmit(data);
-			}
+			onSubmit(data);
 		} catch (error) {
 			console.log(error);
 		}
 	}
 
 	return (
-		<form className={styles.CreateVehicleForm} action="submit" onSubmit={handleSubmit}>
+		<form className={styles.VehicleForm} action="submit" onSubmit={handleSubmit}>
 			<label htmlFor="Nome">Nome:</label>
 			<input
 				type="text"
@@ -122,4 +118,4 @@ const CreateVehicleForm = ({ onSubmit, vehicleData }: CreateVehicleFormProps) =>
 	);
 };
 
-export default CreateVehicleForm;
+export default VehicleForm;

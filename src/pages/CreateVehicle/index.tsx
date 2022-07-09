@@ -1,4 +1,4 @@
-import { CreateVehicleForm } from "../../components";
+import { VehicleForm } from "../../components";
 import { useVehicles } from "../../providers/VehiclesProvider";
 import styles from "./CreateVehicle.module.scss";
 
@@ -8,7 +8,7 @@ function CreateVehicle() {
 	return (
 		<div className={styles.CreateVehicle}>
 			<main className={styles.main}>
-				<CreateVehicleForm onSubmit={handleCreateVehicle} />
+				<VehicleForm onSubmit={handleCreateVehicle} />
 			</main>
 		</div>
 	);
