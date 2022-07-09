@@ -7,6 +7,6 @@ interface FavoriteIconProps {
 	isFavorite: boolean;
 }
 
-export default function FavoriteIcon({ isFavorite, onClick }: FavoriteIconProps) {
+export default function FavoriteIcon({ isFavorite = false, onClick }: FavoriteIconProps) {
 	return <Icon src={isFavorite ? heartFilledIcon : heartEmptyIcon} onClick={onClick} />;
 }

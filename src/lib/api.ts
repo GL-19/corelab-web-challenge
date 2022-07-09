@@ -44,3 +44,9 @@ export async function updateVehicle(
 
 	return response;
 }
+
+export async function toggleVehicleFavorite(id: number): Promise<AxiosResponse> {
+	const response = api.patch<IVehicle>(`/vehicles/${id}`);
+
+	return response;
+}

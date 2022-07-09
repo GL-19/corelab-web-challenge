@@ -1,6 +1,12 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createVehicle, deleteVehicle, getVehicles, updateVehicle } from "../lib/api";
+import {
+	createVehicle,
+	deleteVehicle,
+	getVehicles,
+	toggleVehicleFavorite,
+	updateVehicle,
+} from "../lib/api";
 import { IFilterOptions, IVehicleFormData, IVehicle } from "../types";
 
 interface VehiclesContextData {
@@ -12,6 +18,7 @@ interface VehiclesContextData {
 	handleCreateVehicle: (CreateVehicleData: IVehicleFormData) => Promise<void>;
 	handleUpdateVehicle: (UpdateVehicleData: IVehicleFormData) => Promise<void>;
 	handleDeleteVehicle: (id: number) => Promise<void>;
+	handleToggleFavorite: (id: number) => Promise<void>;
 }
 
 interface VehiclesProviderProps {
@@ -92,6 +99,14 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 		setVehicles(data);
 	}
 
+	async function handleToggleFavorite(id: number): Promise<void> {
+		await toggleVehicleFavorite(id);
+
+		const { data } = await getVehicles(search, filterOptions);
+
+		setVehicles(data);
+	}
+
 	return (
 		<VehiclesContext.Provider
 			value={{
@@ -103,6 +118,7 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 				handleCreateVehicle,
 				handleDeleteVehicle,
 				handleUpdateVehicle,
+				handleToggleFavorite,
 			}}
 		>
 			{children}

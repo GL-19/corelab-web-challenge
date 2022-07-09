@@ -1,3 +1,5 @@
+import styles from "./Icon.module.scss";
+
 interface IconProps {
 	onClick: () => void;
 	src: string;
@@ -5,9 +7,9 @@ interface IconProps {
 
 function Icon({ src, onClick }: IconProps) {
 	return (
-		<button onClick={onClick}>
+		<div className={styles.Card} onClick={onClick}>
 			<img src={src} alt="icon" />
-		</button>
+		</div>
 	);
 }
 
