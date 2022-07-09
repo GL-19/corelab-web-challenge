@@ -1,33 +1,34 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 
 import { IVehicleFormData } from "../../types";
 import styles from "./VehicleForm.module.scss";
 
 interface VehicleFormProps {
-	vehicleFormData?: IVehicleFormData;
+	initialValues?: IVehicleFormData;
 	onSubmit: (data: IVehicleFormData) => void;
 }
 
-const VehicleForm = ({ onSubmit, vehicleFormData }: VehicleFormProps) => {
-	const [name, setName] = useState("");
-	const [brand, setBrand] = useState("");
-	const [description, setDescription] = useState("");
-	const [color, setColor] = useState("");
-	const [plate, setPlate] = useState("");
-	const [year, setYear] = useState(2000);
-	const [price, setPrice] = useState(0);
+const defaultInitialValues: IVehicleFormData = {
+	name: "",
+	brand: "",
+	description: "",
+	color: "",
+	plate: "",
+	year: 2000,
+	price: 0,
+};
 
-	useEffect(() => {
-		if (vehicleFormData) {
-			setName(vehicleFormData?.name);
-			setBrand(vehicleFormData?.brand);
-			setDescription(vehicleFormData?.description);
-			setColor(vehicleFormData?.color);
-			setPlate(vehicleFormData?.plate);
-			setYear(vehicleFormData?.year);
-			setPrice(vehicleFormData?.price);
-		}
-	}, [vehicleFormData]);
+const VehicleForm = ({
+	onSubmit,
+	initialValues = defaultInitialValues,
+}: VehicleFormProps) => {
+	const [name, setName] = useState(initialValues.name);
+	const [brand, setBrand] = useState(initialValues.brand);
+	const [description, setDescription] = useState(initialValues.description);
+	const [color, setColor] = useState(initialValues.color);
+	const [plate, setPlate] = useState(initialValues.plate);
+	const [year, setYear] = useState(initialValues.year);
+	const [price, setPrice] = useState(initialValues.price);
 
 	function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
@@ -42,8 +43,8 @@ const VehicleForm = ({ onSubmit, vehicleFormData }: VehicleFormProps) => {
 			year,
 		};
 
-		if (vehicleFormData?.id) {
-			data.id = vehicleFormData.id;
+		if (initialValues?.id) {
+			data.id = initialValues.id;
 		}
 
 		try {

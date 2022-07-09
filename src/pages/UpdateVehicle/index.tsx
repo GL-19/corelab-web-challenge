@@ -28,7 +28,7 @@ export function UpdateVehicle() {
 				{vehicle && (
 					<VehicleForm
 						onSubmit={handleUpdateVehicle}
-						vehicleFormData={{
+						initialValues={{
 							...vehicle,
 						}}
 					/>

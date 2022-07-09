@@ -35,21 +35,29 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 
 	useEffect(() => {
 		const fetchVehicles = async () => {
-			const { data } = await getVehicles(search, filterOptions);
+			const { data } = await getVehicles();
 			setVehicles(data);
 		};
 
 		fetchVehicles();
-	}, [search, filterOptions]);
+	}, []);
 
-	function handleUpdateFilterOptions(filterOptions: IFilterOptions): void {
+	async function handleUpdateFilterOptions(filterOptions: IFilterOptions): Promise<void> {
 		setFilterOptions(filterOptions);
+
+		const { data } = await getVehicles(search, filterOptions);
+
+		setVehicles(data);
 
 		navigate("/");
 	}
 
-	function handleSearch(search: string): void {
+	async function handleSearch(search: string): Promise<void> {
 		setSearch(search);
+
+		const { data } = await getVehicles(search, filterOptions);
+
+		setVehicles(data);
 	}
 
 	async function handleCreateVehicle(CreateVehicleData: IVehicleFormData): Promise<void> {
@@ -65,15 +73,15 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 	async function handleUpdateVehicle(CreateVehicleData: IVehicleFormData): Promise<void> {
 		if (CreateVehicleData.id) {
 			await updateVehicle(CreateVehicleData, CreateVehicleData.id);
+
+			const { data } = await getVehicles(search, filterOptions);
+
+			setVehicles(data);
+
+			navigate("/");
 		} else {
 			console.log("Id not informed!");
 		}
-
-		const { data } = await getVehicles(search, filterOptions);
-
-		setVehicles(data);
-
-		navigate("/");
 	}
 
 	async function handleDeleteVehicle(id: number): Promise<void> {
