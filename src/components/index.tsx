@@ -8,6 +8,7 @@ import FavoriteIcon from "./Icons/FavoriteIcon";
 import DeleteIcon from "./Icons/DeleteIcon";
 import EditIcon from "./Icons/EditIcon";
 import FilterIcon from "./Icons/FilterIcon";
+import ReturnIcon from "./Icons/ReturnIcon";
 
 export {
 	Button,
@@ -20,4 +21,5 @@ export {
 	DeleteIcon,
 	EditIcon,
 	FilterIcon,
+	ReturnIcon,
 };

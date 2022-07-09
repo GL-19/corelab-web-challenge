@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { VehicleForm } from "../../components";
+import { ReturnIcon, VehicleForm } from "../../components";
 import { getVehicle } from "../../lib/api";
 
 import { useVehicles } from "../../providers/VehiclesProvider";
@@ -30,6 +30,9 @@ export function UpdateVehicle() {
 
 	return (
 		<div className={styles.UpdateVehicle}>
+			<header>
+				<ReturnIcon onClick={() => navigate("/")} />
+			</header>
 			<main className={styles.main}>
 				{vehicle && (
 					<VehicleForm

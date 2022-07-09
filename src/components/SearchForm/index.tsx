@@ -1,8 +1,8 @@
 import { FormEvent, useState } from "react";
+import searchIcon from "../../images/search.svg";
 
 interface ISearch {
 	initialValue: string;
-
 	onSubmit: (input: string) => void;
 }
 
@@ -17,7 +17,9 @@ const SearchForm = ({ onSubmit, initialValue = "" }: ISearch) => {
 
 	return (
 		<form action="submit" onSubmit={handleSubmit}>
-			<button type="submit">Submit</button>
+			<button type="submit">
+				<img src={searchIcon} alt="" />
+			</button>
 			<input
 				type="text"
 				placeholder="Buscar"
