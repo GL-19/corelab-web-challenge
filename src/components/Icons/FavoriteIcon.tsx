@@ -1,24 +1,19 @@
-import Icon from ".";
+import styles from "./Icon.module.scss";
 import heartEmptyIcon from "../../images/heart-empty.svg";
 import heartFilledIcon from "../../images/heart-filled.svg";
 
 interface FavoriteIconProps {
 	onClick: () => void;
 	isFavorite: boolean;
-	size?: string;
 }
 
-export default function FavoriteIcon({
-	isFavorite = false,
-	onClick,
-	size,
-}: FavoriteIconProps) {
+export default function FavoriteIcon({ isFavorite = false, onClick }: FavoriteIconProps) {
 	return (
-		<Icon
+		<img
 			src={isFavorite ? heartFilledIcon : heartEmptyIcon}
+			alt="favorite-icon"
 			onClick={onClick}
-			width={size}
-			height={size}
+			className={styles.Icon}
 		/>
 	);
 }

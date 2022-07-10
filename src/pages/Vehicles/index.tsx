@@ -1,13 +1,5 @@
 import { useVehicles } from "../../providers/VehiclesProvider";
-import {
-	Button,
-	Card,
-	EditIcon,
-	FavoriteIcon,
-	DeleteIcon,
-	SearchInput,
-	FilterIcon,
-} from "../../components";
+import { Button, Card, SearchInput, FilterIcon, CardContent } from "../../components";
 import styles from "./Vehicles.module.scss";
 import { useNavigate } from "react-router-dom";
 import { ChangeEvent } from "react";
@@ -26,12 +18,9 @@ const VehiclesPage = () => {
 	return (
 		<div className={styles.Vehicles}>
 			<main className={styles.main}>
-				<div
-					style={{
-						display: "flex",
-					}}
-				>
+				<div className={styles.searchDiv}>
 					<SearchInput placeholder="Buscar" value={search} onChange={handleOnChange} />
+
 					<FilterIcon onClick={() => navigate("/filter-options")} />
 				</div>
 
@@ -40,21 +29,12 @@ const VehiclesPage = () => {
 				<div>
 					{vehicles.map((vehicle) => (
 						<Card key={vehicle.id} title={vehicle.name} color={vehicle.color}>
-							<div
-								style={{
-									display: "flex",
-								}}
-							>
-								<EditIcon onClick={() => navigate(`/${vehicle.id}/update`)} />
-								<DeleteIcon onClick={() => handleDeleteVehicle(vehicle.id)} />
-								<FavoriteIcon
-									isFavorite={vehicle.isFavorite}
-									onClick={() => handleToggleFavorite(vehicle.id)}
-								/>
-							</div>
-							<p>Price: {vehicle.price}</p>
-							<p>Description: {vehicle.description}</p>
-							<p>Year: {vehicle.year} </p>
+							<CardContent
+								onClickEdit={() => navigate(`/${vehicle.id}/update`)}
+								onClickDelete={() => handleDeleteVehicle(vehicle.id)}
+								onClickFavorite={() => () => handleToggleFavorite(vehicle.id)}
+								vehicle={vehicle}
+							/>
 						</Card>
 					))}
 				</div>

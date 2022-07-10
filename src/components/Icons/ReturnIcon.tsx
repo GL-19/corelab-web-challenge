@@ -1,11 +1,12 @@
-import Icon from ".";
+import styles from "./Icon.module.scss";
 import arrowIcon from "../../images/arrow-left.svg";
 
 interface ReturnIconProps {
 	onClick: () => void;
-	size?: string;
 }
 
-export default function ReturnIcon({ onClick, size }: ReturnIconProps) {
-	return <Icon src={arrowIcon} onClick={onClick} width={size} height={size} />;
+export default function ReturnIcon({ onClick }: ReturnIconProps) {
+	return (
+		<img src={arrowIcon} alt="filter-icon" className={styles.Icon} onClick={onClick} />
+	);
 }

@@ -1,11 +1,12 @@
-import Icon from ".";
+import styles from "./Icon.module.scss";
 import deleteIcon from "../../images/delete.svg";
 
 interface DeleteIconProps {
 	onClick: () => void;
-	size?: string;
 }
 
-export default function DeleteIcon({ onClick, size }: DeleteIconProps) {
-	return <Icon src={deleteIcon} onClick={onClick} width={size} height={size} />;
+export default function DeleteIcon({ onClick }: DeleteIconProps) {
+	return (
+		<img src={deleteIcon} alt="delete-icon" className={styles.Icon} onClick={onClick} />
+	);
 }

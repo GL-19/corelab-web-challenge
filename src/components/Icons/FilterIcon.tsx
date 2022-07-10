@@ -1,11 +1,12 @@
-import Icon from ".";
+import styles from "./Icon.module.scss";
 import filterIcon from "../../images/filter.svg";
 
 interface FilterIconProps {
 	onClick: () => void;
-	size?: string;
 }
 
-export default function FilterIcon({ onClick, size }: FilterIconProps) {
-	return <Icon src={filterIcon} onClick={onClick} width={size} height={size} />;
+export default function FilterIcon({ onClick }: FilterIconProps) {
+	return (
+		<img src={filterIcon} alt="filter-icon" className={styles.Icon} onClick={onClick} />
+	);
 }

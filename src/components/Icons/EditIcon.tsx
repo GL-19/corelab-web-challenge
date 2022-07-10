@@ -1,11 +1,12 @@
-import Icon from ".";
+import styles from "./Icon.module.scss";
 import editIcon from "../../images/edit.svg";
 
 interface EditIconProps {
 	onClick: () => void;
-	size?: string;
 }
 
-export default function EditIcon({ onClick, size }: EditIconProps) {
-	return <Icon src={editIcon} onClick={onClick} width={size} height={size} />;
+export default function EditIcon({ onClick }: EditIconProps) {
+	return (
+		<img src={editIcon} alt="filter-icon" className={styles.Icon} onClick={onClick} />
+	);
 }

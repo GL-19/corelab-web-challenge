@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import styles from "./SearchInput.module.scss";
 import searchIcon from "../../images/search.svg";
 
 interface ISearch {
@@ -9,8 +10,8 @@ interface ISearch {
 
 const SearchInput = ({ onChange, value, placeholder }: ISearch) => {
 	return (
-		<div>
-			<img src={searchIcon} alt="" />
+		<div className={styles.SearchInput}>
+			<img src={searchIcon} alt="" className={styles.icon} />
 
 			<input type="text" placeholder={placeholder} value={value} onChange={onChange} />
 		</div>
