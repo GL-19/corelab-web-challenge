@@ -5,16 +5,23 @@ import {
 	EditIcon,
 	FavoriteIcon,
 	DeleteIcon,
-	SearchForm,
+	SearchInput,
 	FilterIcon,
 } from "../../components";
 import styles from "./Vehicles.module.scss";
 import { useNavigate } from "react-router-dom";
+import { ChangeEvent } from "react";
 
 const VehiclesPage = () => {
 	const navigate = useNavigate();
 	const { search, vehicles, handleSearch, handleDeleteVehicle, handleToggleFavorite } =
 		useVehicles();
+
+	async function handleOnChange(event: ChangeEvent<HTMLInputElement>): Promise<void> {
+		event.preventDefault();
+
+		handleSearch(event.target.value);
+	}
 
 	return (
 		<div className={styles.Vehicles}>
@@ -24,7 +31,7 @@ const VehiclesPage = () => {
 						display: "flex",
 					}}
 				>
-					<SearchForm initialValue={search} onSubmit={handleSearch} />
+					<SearchInput placeholder="Buscar" value={search} onChange={handleOnChange} />
 					<FilterIcon onClick={() => navigate("/filter-options")} />
 				</div>
 

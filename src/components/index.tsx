@@ -1,6 +1,6 @@
 import Button from "./Button";
 import Card from "./Card";
-import SearchForm from "./SearchForm";
+import SearchInput from "./SearchInput";
 import VehicleForm from "./VehicleForm";
 import FilterOptionsForm from "./FilterOptionsForm";
 import Icon from "./Icons";
@@ -13,7 +13,7 @@ import ReturnIcon from "./Icons/ReturnIcon";
 export {
 	Button,
 	Card,
-	SearchForm,
+	SearchInput,
 	VehicleForm,
 	FilterOptionsForm,
 	Icon,
