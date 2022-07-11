@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -68,13 +69,21 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 	}
 
 	async function handleCreateVehicle(CreateVehicleData: IVehicleFormData): Promise<void> {
-		await createVehicle(CreateVehicleData);
+		try {
+			await createVehicle(CreateVehicleData);
 
-		const { data } = await getVehicles(search, filterOptions);
+			const { data } = await getVehicles(search, filterOptions);
 
-		setVehicles(data);
+			setVehicles(data);
 
-		navigate("/");
+			navigate("/");
+		} catch (error) {
+			if (error instanceof AxiosError) {
+				if (error.response.data.error === "Vehicle already exists!") {
+					throw new Error("Plate already exists");
+				}
+			}
+		}
 	}
 
 	async function handleUpdateVehicle(CreateVehicleData: IVehicleFormData): Promise<void> {

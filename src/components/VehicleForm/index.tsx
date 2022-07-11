@@ -1,75 +1,76 @@
-import { FormEvent, useState } from "react";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import { IVehicleFormData } from "../../types";
-import { brandOptions } from "../../utils/brandOptions";
-import { colorOptions } from "../../utils/colorOptions";
+import { yearOptions, colorOptions, brandOptions } from "../../utils";
+
 import Button from "../Button";
 import styles from "./VehicleForm.module.scss";
+import { AxiosError } from "axios";
+import { useState } from "react";
 
 interface VehicleFormProps {
 	initialValues?: IVehicleFormData;
 	onSubmit: (data: IVehicleFormData) => void;
 }
 
-const defaultInitialValues: IVehicleFormData = {
+const schema = yup.object().shape({
+	name: yup.string().required(),
+	brand: yup.string().required(),
+	description: yup.string().required(),
+	color: yup.string().required(),
+	plate: yup.string().required(),
+	year: yup.number().required(),
+	price: yup.number().required(),
+});
+
+const defaultValues: IVehicleFormData = {
 	name: "",
 	brand: brandOptions[0],
 	description: "",
 	color: colorOptions[0].color,
 	plate: "",
-	year: 2000,
+	year: yearOptions[0],
 	price: 0,
 };
 
-const VehicleForm = ({
-	onSubmit,
-	initialValues = defaultInitialValues,
-}: VehicleFormProps) => {
-	const [name, setName] = useState(initialValues.name);
-	const [brand, setBrand] = useState(initialValues.brand);
-	const [description, setDescription] = useState(initialValues.description);
-	const [color, setColor] = useState(initialValues.color);
-	const [plate, setPlate] = useState(initialValues.plate);
-	const [year, setYear] = useState(initialValues.year);
-	const [price, setPrice] = useState(initialValues.price);
+const VehicleForm = ({ onSubmit, initialValues = defaultValues }: VehicleFormProps) => {
+	//const [error, setError] = useState("");
 
-	function handleSubmit(event: FormEvent<HTMLFormElement>) {
-		event.preventDefault();
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<IVehicleFormData>({
+		defaultValues: initialValues,
+		resolver: yupResolver(schema),
+	});
 
-		const data: IVehicleFormData = {
-			name,
-			brand,
-			description,
-			color,
-			plate,
-			price,
-			year,
-		};
-
-		if (initialValues?.id) {
-			data.id = initialValues.id;
-		}
-
+	function onSubmitHandle(data: IVehicleFormData) {
 		try {
+			if (initialValues?.id) {
+				data.id = initialValues.id;
+			}
+
+			/* 	setError(""); */
 			onSubmit(data);
 		} catch (error) {
-			console.log(error);
+			// setError(error);
 		}
 	}
 
 	return (
-		<form className={styles.VehicleForm} action="submit" onSubmit={handleSubmit}>
-			<label htmlFor="Nome">Nome:</label>
-			<input
-				id="Nome"
-				type="text"
-				required
-				value={name}
-				onChange={(event) => setName(event.target.value)}
-			/>
+		<form
+			className={styles.VehicleForm}
+			action="submit"
+			onSubmit={handleSubmit(onSubmitHandle)}
+		>
+			<label htmlFor="Name">Nome:</label>
+			<input type="text" required {...register("name")} />
 
-			<label htmlFor="Marca">Marca:</label>
-			<select id="Marca" value={brand} onChange={(event) => setBrand(event.target.value)}>
+			<label htmlFor="brand">Marca:</label>
+			<select required {...register("brand")}>
 				{brandOptions.map((brand) => (
 					<option key={brand} value={brand}>
 						{brand}
@@ -77,17 +78,11 @@ const VehicleForm = ({
 				))}
 			</select>
 
-			<label htmlFor="Descrição">Descrição:</label>
-			<input
-				id="Descrição"
-				type="text"
-				required
-				value={description}
-				onChange={(event) => setDescription(event.target.value)}
-			/>
+			<label htmlFor="description">Descrição:</label>
+			<input type="text" required {...register("description")} />
 
-			<label htmlFor="Cor">Cor:</label>
-			<select id="Cor" value={color} onChange={(event) => setColor(event.target.value)}>
+			<label htmlFor="color">Cor:</label>
+			<select {...register("color")}>
 				{colorOptions.map((colorOption) => (
 					<option key={colorOption.name} value={colorOption.color}>
 						{colorOption.name}
@@ -95,34 +90,25 @@ const VehicleForm = ({
 				))}
 			</select>
 
-			<label htmlFor="Ano">Ano:</label>
-			<input
-				id="Ano"
-				type="number"
-				required
-				min="1955"
-				max="2025"
-				value={year.toString()}
-				onChange={(event) => setYear(Number(event.target.value))}
-			/>
+			<label htmlFor="year">Ano:</label>
+			<select required {...register("year")}>
+				{yearOptions.map((year) => (
+					<option key={year} value={year}>
+						{year}
+					</option>
+				))}
+			</select>
 
-			<label htmlFor="Placa">Placa:</label>
+			<label htmlFor="plate">Placa:</label>
 			<input
-				id="Placa"
 				type="text"
 				required
-				value={plate}
-				onChange={(event) => setPlate(event.target.value)}
+				{...register("plate")}
+				pattern="[a-zA-Z]{3}[0-9][A-Za-z0-9][0-9]{2}"
 			/>
 
-			<label htmlFor="Preço">Preço:</label>
-			<input
-				id="Preço"
-				type="number"
-				required
-				value={price.toString()}
-				onChange={(event) => setPrice(Number(event.target.value))}
-			/>
+			<label htmlFor="price">Preço:</label>
+			<input type="number" required {...register("price")} />
 
 			<Button type="submit" maxWidth="8rem" fontSize="1rem">
 				Salvar
