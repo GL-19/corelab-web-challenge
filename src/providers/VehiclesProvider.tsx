@@ -1,4 +1,3 @@
-import { AxiosError } from "axios";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -9,6 +8,14 @@ import {
 	updateVehicle,
 } from "../services/api";
 import { IFilterOptions, IVehicleFormData, IVehicle } from "../types";
+
+const initialFilterOptions: IFilterOptions = {
+	brand: "",
+	color: "",
+	year: "",
+	minPrice: "",
+	maxPrice: "",
+};
 
 interface VehiclesContextData {
 	filterOptions: IFilterOptions;
@@ -33,17 +40,14 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 
 	const [search, setSearch] = useState<string>("");
 	const [vehicles, setVehicles] = useState<IVehicle[]>([]);
-	const [filterOptions, setFilterOptions] = useState<IFilterOptions>({
-		brand: "",
-		color: "",
-		year: "",
-		minPrice: "",
-		maxPrice: "",
-	});
+
+	const [filterOptions, setFilterOptions] =
+		useState<IFilterOptions>(initialFilterOptions);
 
 	useEffect(() => {
 		const fetchVehicles = async () => {
 			const { data } = await getVehicles();
+
 			setVehicles(data);
 		};
 
@@ -78,11 +82,7 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 
 			navigate("/");
 		} catch (error) {
-			if (error instanceof AxiosError) {
-				if (error.response.data.error === "Vehicle already exists!") {
-					throw new Error("Plate already exists");
-				}
-			}
+			console.log("Could not create");
 		}
 	}
 

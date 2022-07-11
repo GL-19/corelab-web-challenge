@@ -7,7 +7,7 @@ import { yearOptions, colorOptions, brandOptions } from "../../utils";
 
 import Button from "../Button";
 import styles from "./VehicleForm.module.scss";
-import { AxiosError } from "axios";
+
 import { useState } from "react";
 
 interface VehicleFormProps {
@@ -36,7 +36,7 @@ const defaultValues: IVehicleFormData = {
 };
 
 const VehicleForm = ({ onSubmit, initialValues = defaultValues }: VehicleFormProps) => {
-	//const [error, setError] = useState("");
+	const [error, setError] = useState("");
 
 	const {
 		register,
@@ -53,10 +53,10 @@ const VehicleForm = ({ onSubmit, initialValues = defaultValues }: VehicleFormPro
 				data.id = initialValues.id;
 			}
 
-			/* 	setError(""); */
+			setError("");
 			onSubmit(data);
 		} catch (error) {
-			// setError(error);
+			setError("Erro na submissão");
 		}
 	}
 
@@ -109,6 +109,8 @@ const VehicleForm = ({ onSubmit, initialValues = defaultValues }: VehicleFormPro
 
 			<label htmlFor="price">Preço:</label>
 			<input type="number" required {...register("price")} />
+
+			{error && <p>{error}</p>}
 
 			<Button type="submit" maxWidth="8rem" fontSize="1rem">
 				Salvar
