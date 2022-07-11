@@ -32,6 +32,7 @@ export default function Card({
 				<FavoriteIcon isFavorite={vehicle.isFavorite} onClick={onClickFavorite} />
 			</div>
 			<p>Price: {vehicle.price}</p>
+			<p>Brand: {vehicle.brand}</p>
 			<p>Description: {vehicle.description}</p>
 			<p>Year: {vehicle.year} </p>
 		</div>

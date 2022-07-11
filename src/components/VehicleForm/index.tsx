@@ -13,9 +13,9 @@ interface VehicleFormProps {
 
 const defaultInitialValues: IVehicleFormData = {
 	name: "",
-	brand: "",
+	brand: brandOptions[0],
 	description: "",
-	color: "",
+	color: colorOptions[0].color,
 	plate: "",
 	year: 2000,
 	price: 0,
