@@ -1,14 +1,15 @@
+import { ButtonHTMLAttributes } from "react";
 import styles from "./Button.module.scss";
 
-interface IButton {
-	onClick: () => void;
-	text: string;
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+	maxWidth?: string;
+	fontSize?: string;
 }
 
-const Button = (props: IButton) => {
+const Button = ({ onClick, children, maxWidth, fontSize }: ButtonProps) => {
 	return (
-		<button onClick={props.onClick} className={styles.Button}>
-			{props.text}
+		<button onClick={onClick} className={styles.Button} style={{ maxWidth, fontSize }}>
+			{children}
 		</button>
 	);
 };

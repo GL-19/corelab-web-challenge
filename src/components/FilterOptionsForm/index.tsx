@@ -1,5 +1,8 @@
 import { FormEvent, useState } from "react";
+import { Button } from "..";
 import { useVehicles } from "../../providers/VehiclesProvider";
+import { brandOptions } from "../../utils/brandOptions";
+import { colorOptions } from "../../utils/colorOptions";
 
 import styles from "./FilterOptionsForm.module.scss";
 
@@ -21,20 +24,19 @@ const FilterOptionsForm = () => {
 	return (
 		<form className={styles.FilterOptionsForm} action="submit" onSubmit={handleSubmit}>
 			<label htmlFor="Marca">Marca:</label>
-			<input
-				type="text"
-				id="Marca"
-				value={brand}
-				onChange={(event) => setBrand(event.target.value)}
-			/>
+			<select id="Marca" value={brand} onChange={(event) => setBrand(event.target.value)}>
+				{brandOptions.map((brand) => (
+					<option value={brand}>{brand}</option>
+				))}
+			</select>
 
 			<label htmlFor="Cor">Cor:</label>
-			<input
-				type="text"
-				id="Cor"
-				value={color}
-				onChange={(event) => setColor(event.target.value)}
-			/>
+
+			<select id="Cor" value={color} onChange={(event) => setColor(event.target.value)}>
+				{colorOptions.map((colorOption) => (
+					<option value={colorOption.color}>{colorOption.name}</option>
+				))}
+			</select>
 
 			<label htmlFor="Ano">Ano:</label>
 			<input
@@ -60,7 +62,9 @@ const FilterOptionsForm = () => {
 				onChange={(event) => setMaxPrice(Number(event.target.value))}
 			/>
 
-			<button>Salvar</button>
+			<Button type="submit" maxWidth="8rem" fontSize="1rem">
+				Salvar
+			</Button>
 		</form>
 	);
 };

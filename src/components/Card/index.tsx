@@ -1,25 +1,39 @@
-import { ReactNode } from "react";
 import styles from "./Card.module.scss";
 
-interface ICard {
-	title: string;
-	children: ReactNode;
-	color?: string;
+import DeleteIcon from "../Icons/DeleteIcon";
+import EditIcon from "../Icons/EditIcon";
+import FavoriteIcon from "../Icons/FavoriteIcon";
+import { IVehicle } from "../../types";
+
+interface CardProps {
+	onClickEdit: () => void;
+	onClickDelete: () => void;
+	onClickFavorite: () => void;
+	vehicle: IVehicle;
 }
 
-const Card = ({ title, children, color }: ICard) => {
+export default function Card({
+	onClickDelete,
+	onClickFavorite,
+	onClickEdit,
+	vehicle,
+}: CardProps) {
 	return (
 		<div
 			className={styles.Card}
 			style={{
-				backgroundColor: color ? color : "inherit",
+				backgroundColor: vehicle.color ? vehicle.color : "black",
 			}}
 		>
-			<h2>{title}</h2>
-
-			<div className={styles.content}>{children}</div>
+			<h1>{vehicle.name}</h1>
+			<div className={styles.IconsDiv}>
+				<EditIcon onClick={onClickEdit} />
+				<DeleteIcon onClick={onClickDelete} />
+				<FavoriteIcon isFavorite={vehicle.isFavorite} onClick={onClickFavorite} />
+			</div>
+			<p>Price: {vehicle.price}</p>
+			<p>Description: {vehicle.description}</p>
+			<p>Year: {vehicle.year} </p>
 		</div>
 	);
-};
-
-export default Card;
+}

@@ -18,6 +18,14 @@
 		height: 2.5rem;
 	}
 
+	.cardsDiv {
+		display: grid;
+		justify-items: center;
+		align-items: center;
+		grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+		gap: 1rem;
+	}
+
 	@include tablet {
 	}
 

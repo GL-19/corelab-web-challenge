@@ -1,5 +1,3 @@
-import styles from "./Icon.module.scss";
-
-interface IconProps {
+export interface IconProps {
 	onClick: () => void;
 }

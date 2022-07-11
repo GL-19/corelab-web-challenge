@@ -8,12 +8,10 @@ import DeleteIcon from "./Icons/DeleteIcon";
 import EditIcon from "./Icons/EditIcon";
 import FilterIcon from "./Icons/FilterIcon";
 import ReturnIcon from "./Icons/ReturnIcon";
-import CardContent from "./CardContent";
 
 export {
 	Button,
 	Card,
-	CardContent,
 	SearchInput,
 	VehicleForm,
 	FilterOptionsForm,

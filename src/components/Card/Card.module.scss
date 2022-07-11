@@ -1,5 +1,7 @@
 .Card {
 	padding: 1.5rem;
+	max-width: 20rem;
+
 	text-align: left;
 	color: #ffffff;
 	text-decoration: none;
@@ -23,5 +25,14 @@
 		margin: 0;
 		font-size: 1rem;
 		line-height: 1.5;
+		word-break: break-all;
 	}
+}
+
+.IconsDiv {
+	display: flex;
+	justify-content: space-between;
+
+	width: 5rem;
+	height: 2.5rem;
 }

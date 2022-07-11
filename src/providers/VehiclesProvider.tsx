@@ -6,7 +6,7 @@ import {
 	getVehicles,
 	toggleVehicleFavorite,
 	updateVehicle,
-} from "../lib/api";
+} from "../services/api";
 import { IFilterOptions, IVehicleFormData, IVehicle } from "../types";
 
 interface VehiclesContextData {

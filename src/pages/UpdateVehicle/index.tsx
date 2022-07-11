@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ReturnIcon, VehicleForm } from "../../components";
-import { getVehicle } from "../../lib/api";
+import { getVehicle } from "../../services/api";
 
 import { useVehicles } from "../../providers/VehiclesProvider";
 import { IVehicle } from "../../types";
