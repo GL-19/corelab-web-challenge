@@ -71,7 +71,9 @@ const VehicleForm = ({
 			<label htmlFor="Marca">Marca:</label>
 			<select id="Marca" value={brand} onChange={(event) => setBrand(event.target.value)}>
 				{brandOptions.map((brand) => (
-					<option value={brand}>{brand}</option>
+					<option key={brand} value={brand}>
+						{brand}
+					</option>
 				))}
 			</select>
 
@@ -87,7 +89,9 @@ const VehicleForm = ({
 			<label htmlFor="Cor">Cor:</label>
 			<select id="Cor" value={color} onChange={(event) => setColor(event.target.value)}>
 				{colorOptions.map((colorOption) => (
-					<option value={colorOption.color}>{colorOption.name}</option>
+					<option key={colorOption.name} value={colorOption.color}>
+						{colorOption.name}
+					</option>
 				))}
 			</select>
 

@@ -35,9 +35,9 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 	const [filterOptions, setFilterOptions] = useState<IFilterOptions>({
 		brand: "",
 		color: "",
-		year: 0,
-		minPrice: 0,
-		maxPrice: 0,
+		year: "",
+		minPrice: "",
+		maxPrice: "",
 	});
 
 	useEffect(() => {
