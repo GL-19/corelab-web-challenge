@@ -2,18 +2,29 @@ import { useVehicles } from "../../providers/VehiclesProvider";
 import { SearchButton, Card, SearchInput, FilterIcon, Header } from "../../components";
 import styles from "./Vehicles.module.scss";
 import { useNavigate } from "react-router-dom";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useMemo } from "react";
 
 const VehiclesPage = () => {
 	const navigate = useNavigate();
 	const {
 		search,
 		vehicles,
+		filterOptions,
 		handleSearch,
 		handleDeleteVehicle,
 		handleToggleFavorite,
 		handleResetSearchAndFilter,
 	} = useVehicles();
+
+	const isFilterActive = useMemo(() => {
+		for (let option in filterOptions) {
+			if (filterOptions[option]) {
+				return true;
+			}
+		}
+
+		return false;
+	}, [filterOptions]);
 
 	async function handleOnChange(event: ChangeEvent<HTMLInputElement>): Promise<void> {
 		event.preventDefault();
@@ -25,7 +36,10 @@ const VehiclesPage = () => {
 
 	return (
 		<main className={styles.Vehicles}>
-			<Header onClick={handleResetSearchAndFilter} displayButton={!!search} />
+			<Header
+				onClick={handleResetSearchAndFilter}
+				displayButton={!!search || isFilterActive}
+			/>
 
 			<div className={styles.searchDiv}>
 				<SearchInput placeholder="Buscar" value={search} onChange={handleOnChange} />

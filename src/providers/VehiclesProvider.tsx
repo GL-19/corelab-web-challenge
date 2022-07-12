@@ -72,11 +72,7 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 		try {
 			setSearch(search);
 
-			console.log(search);
-
 			const { data } = await getVehicles(search, filterOptions);
-
-			console.log(data);
 
 			setVehicles(data);
 		} catch {
