@@ -1,20 +1,19 @@
 @import "../../styles/break-points.scss";
 
 .Vehicles {
-	display: grid;
-	padding: 1rem 2rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2rem;
 
-	.main {
-		display: grid;
-		gap: 1rem;
-		width: 100%;
-	}
+	padding: 1rem 2rem;
 
 	.searchDiv {
 		display: flex;
 		justify-content: space-between;
 
 		width: 100%;
+		max-width: 50rem;
 		height: 2.5rem;
 	}
 

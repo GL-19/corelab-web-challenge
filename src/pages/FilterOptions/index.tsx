@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { FilterOptionsForm, ReturnIcon } from "../../components";
+import { FilterOptionsForm, Header } from "../../components";
 
 import styles from "./FilterOptions.module.scss";
 
@@ -8,12 +8,9 @@ export function FilterOptions() {
 
 	return (
 		<div className={styles.FilterOptions}>
-			<header>
-				<ReturnIcon onClick={() => navigate("/")} />
-			</header>
-			<main className={styles.main}>
-				<FilterOptionsForm />
-			</main>
+			<Header onClick={() => navigate("/")} />
+
+			<FilterOptionsForm />
 		</div>
 	);
 }

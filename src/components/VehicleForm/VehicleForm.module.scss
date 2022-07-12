@@ -5,7 +5,7 @@
 
 	padding: 2.5rem;
 	text-align: left;
-	background-color: #ffffff;
+	background-color: #ececec;
 	text-decoration: none;
 	border: 1px solid #eaeaea;
 	border-radius: 10px;
@@ -20,5 +20,20 @@
 		margin: 0;
 		font-size: 1rem;
 		line-height: 1.5;
+	}
+
+	label {
+		font-size: 0.8125rem;
+		font-weight: 400;
+		margin-top: 0.5rem;
+		margin-left: 0.5rem;
+	}
+
+	.buttondiv {
+		width: 100%;
+		margin-top: 2rem;
+
+		display: flex;
+		flex-direction: row-reverse;
 	}
 }

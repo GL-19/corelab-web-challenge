@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { Button } from "..";
+import { SubmitButton, FormInput, FormSelect } from "..";
 import { useVehicles } from "../../providers/VehiclesProvider";
 import { IFilterOptions } from "../../types";
 
@@ -50,47 +50,47 @@ const FilterOptionsForm = () => {
 			onSubmit={handleSubmit(onSubmitHandle)}
 		>
 			<label htmlFor="brand">Marca:</label>
-			<select {...register("brand")}>
+			<FormSelect {...register("brand")}>
 				<option value=""></option>
 				{brandOptions.map((brand) => (
 					<option key={brand} value={brand}>
 						{brand}
 					</option>
 				))}
-			</select>
+			</FormSelect>
 
 			<label htmlFor="color">Cor:</label>
-			<select {...register("color")}>
+			<FormSelect {...register("color")}>
 				<option value=""></option>
 				{colorOptions.map((colorOption) => (
 					<option key={colorOption.name} value={colorOption.color}>
 						{colorOption.name}
 					</option>
 				))}
-			</select>
+			</FormSelect>
 
 			<label htmlFor="year">Ano:</label>
-			<select {...register("year")}>
+			<FormSelect {...register("year")}>
 				<option value=""></option>
 				{yearOptions.map((year) => (
 					<option key={year} value={year}>
 						{year}
 					</option>
 				))}
-			</select>
+			</FormSelect>
 			<p>{errors.year?.message}</p>
 
 			<label htmlFor="minPrice">Preço Minimo</label>
-			<input {...register("minPrice")} type="number" />
+			<FormInput {...register("minPrice")} type="number" />
 			<p>{errors.minPrice?.message}</p>
 
 			<label htmlFor="maxPrice">Preço Máximo</label>
-			<input {...register("maxPrice")} type="number" />
+			<FormInput {...register("maxPrice")} type="number" />
 			<p>{errors.maxPrice?.message}</p>
 
-			<Button type="submit" maxWidth="8rem" fontSize="1rem">
-				Salvar
-			</Button>
+			<div className={styles.buttondiv}>
+				<SubmitButton type="submit">Salvar</SubmitButton>
+			</div>
 		</form>
 	);
 };

@@ -5,10 +5,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { IVehicleFormData } from "../../types";
 import { yearOptions, colorOptions, brandOptions } from "../../utils";
 
-import Button from "../Button";
 import styles from "./VehicleForm.module.scss";
-
-import { useState } from "react";
+import { SubmitButton, FormInput, FormSelect } from "..";
 
 interface VehicleFormProps {
 	initialValues?: IVehicleFormData;
@@ -36,28 +34,17 @@ const defaultValues: IVehicleFormData = {
 };
 
 const VehicleForm = ({ onSubmit, initialValues = defaultValues }: VehicleFormProps) => {
-	const [error, setError] = useState("");
-
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-	} = useForm<IVehicleFormData>({
+	const { register, handleSubmit } = useForm<IVehicleFormData>({
 		defaultValues: initialValues,
 		resolver: yupResolver(schema),
 	});
 
 	function onSubmitHandle(data: IVehicleFormData) {
-		try {
-			if (initialValues?.id) {
-				data.id = initialValues.id;
-			}
-
-			setError("");
-			onSubmit(data);
-		} catch (error) {
-			setError("Erro na submissão");
+		if (initialValues?.id) {
+			data.id = initialValues.id;
 		}
+
+		onSubmit(data);
 	}
 
 	return (
@@ -67,40 +54,40 @@ const VehicleForm = ({ onSubmit, initialValues = defaultValues }: VehicleFormPro
 			onSubmit={handleSubmit(onSubmitHandle)}
 		>
 			<label htmlFor="Name">Nome:</label>
-			<input type="text" required {...register("name")} />
+			<FormInput type="text" required {...register("name")} />
 
 			<label htmlFor="brand">Marca:</label>
-			<select required {...register("brand")}>
+			<FormSelect required {...register("brand")}>
 				{brandOptions.map((brand) => (
 					<option key={brand} value={brand}>
 						{brand}
 					</option>
 				))}
-			</select>
+			</FormSelect>
 
 			<label htmlFor="description">Descrição:</label>
-			<input type="text" required {...register("description")} />
+			<FormInput type="text" required {...register("description")} />
 
 			<label htmlFor="color">Cor:</label>
-			<select {...register("color")}>
+			<FormSelect {...register("color")}>
 				{colorOptions.map((colorOption) => (
 					<option key={colorOption.name} value={colorOption.color}>
 						{colorOption.name}
 					</option>
 				))}
-			</select>
+			</FormSelect>
 
 			<label htmlFor="year">Ano:</label>
-			<select required {...register("year")}>
+			<FormSelect required {...register("year")}>
 				{yearOptions.map((year) => (
 					<option key={year} value={year}>
 						{year}
 					</option>
 				))}
-			</select>
+			</FormSelect>
 
 			<label htmlFor="plate">Placa:</label>
-			<input
+			<FormInput
 				type="text"
 				required
 				{...register("plate")}
@@ -108,13 +95,11 @@ const VehicleForm = ({ onSubmit, initialValues = defaultValues }: VehicleFormPro
 			/>
 
 			<label htmlFor="price">Preço:</label>
-			<input type="number" required {...register("price")} />
+			<FormInput type="number" required {...register("price")} />
 
-			{error && <p>{error}</p>}
-
-			<Button type="submit" maxWidth="8rem" fontSize="1rem">
-				Salvar
-			</Button>
+			<div className={styles.buttondiv}>
+				<SubmitButton type="submit">Salvar</SubmitButton>
+			</div>
 		</form>
 	);
 };

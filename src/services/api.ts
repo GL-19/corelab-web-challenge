@@ -20,12 +20,12 @@ export function getVehicle(id: number): Promise<AxiosResponse> {
 }
 
 export function getVehicles(
-	search: string = "",
+	searchString: string = "",
 	filterOptions?: IFilterOptions
 ): Promise<AxiosResponse> {
 	return api.get(`/vehicles`, {
 		params: {
-			search,
+			searchString,
 			...filterOptions,
 		},
 	});

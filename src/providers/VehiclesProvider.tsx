@@ -27,6 +27,7 @@ interface VehiclesContextData {
 	handleUpdateVehicle: (UpdateVehicleData: IVehicleFormData) => Promise<void>;
 	handleDeleteVehicle: (id: number) => Promise<void>;
 	handleToggleFavorite: (id: number) => Promise<void>;
+	handleResetSearchAndFilter: () => Promise<void>;
 }
 
 interface VehiclesProviderProps {
@@ -40,7 +41,6 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 
 	const [search, setSearch] = useState<string>("");
 	const [vehicles, setVehicles] = useState<IVehicle[]>([]);
-
 	const [filterOptions, setFilterOptions] =
 		useState<IFilterOptions>(initialFilterOptions);
 
@@ -55,21 +55,33 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 	}, []);
 
 	async function handleUpdateFilterOptions(filterOptions: IFilterOptions): Promise<void> {
-		setFilterOptions(filterOptions);
+		try {
+			setFilterOptions(filterOptions);
 
-		const { data } = await getVehicles(search, filterOptions);
+			const { data } = await getVehicles(search, filterOptions);
 
-		setVehicles(data);
+			setVehicles(data);
 
-		navigate("/");
+			navigate("/");
+		} catch {
+			console.log("Could not update filter options");
+		}
 	}
 
 	async function handleSearch(search: string): Promise<void> {
-		setSearch(search);
+		try {
+			setSearch(search);
 
-		const { data } = await getVehicles(search, filterOptions);
+			console.log(search);
 
-		setVehicles(data);
+			const { data } = await getVehicles(search, filterOptions);
+
+			console.log(data);
+
+			setVehicles(data);
+		} catch {
+			console.log("Could not update search");
+		}
 	}
 
 	async function handleCreateVehicle(CreateVehicleData: IVehicleFormData): Promise<void> {
@@ -82,12 +94,12 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 
 			navigate("/");
 		} catch (error) {
-			console.log("Could not create");
+			console.log("Could not create vehicle");
 		}
 	}
 
 	async function handleUpdateVehicle(CreateVehicleData: IVehicleFormData): Promise<void> {
-		if (CreateVehicleData.id) {
+		try {
 			await updateVehicle(CreateVehicleData, CreateVehicleData.id);
 
 			const { data } = await getVehicles(search, filterOptions);
@@ -95,23 +107,41 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 			setVehicles(data);
 
 			navigate("/");
-		} else {
-			console.log("Id not informed!");
+		} catch {
+			console.log("Could not update vehicle");
 		}
 	}
 
 	async function handleDeleteVehicle(id: number): Promise<void> {
-		await deleteVehicle(id);
+		try {
+			await deleteVehicle(id);
 
-		const { data } = await getVehicles(search, filterOptions);
+			const { data } = await getVehicles(search, filterOptions);
 
-		setVehicles(data);
+			setVehicles(data);
+		} catch {
+			console.log("Could not delete vehicle");
+		}
 	}
 
 	async function handleToggleFavorite(id: number): Promise<void> {
-		await toggleVehicleFavorite(id);
+		try {
+			await toggleVehicleFavorite(id);
 
-		const { data } = await getVehicles(search, filterOptions);
+			const { data } = await getVehicles(search, filterOptions);
+
+			setVehicles(data);
+		} catch {
+			console.log("Could not update favorite status");
+		}
+	}
+
+	async function handleResetSearchAndFilter(): Promise<void> {
+		setSearch("");
+
+		setFilterOptions(initialFilterOptions);
+
+		const { data } = await getVehicles();
 
 		setVehicles(data);
 	}
@@ -128,6 +158,7 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 				handleDeleteVehicle,
 				handleUpdateVehicle,
 				handleToggleFavorite,
+				handleResetSearchAndFilter,
 			}}
 		>
 			{children}

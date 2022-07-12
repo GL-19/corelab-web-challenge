@@ -2,13 +2,13 @@ import { ChangeEvent } from "react";
 import styles from "./SearchInput.module.scss";
 import searchIcon from "../../images/search.svg";
 
-interface ISearch {
+interface ISearchInput {
 	value: string;
 	placeholder: string;
 	onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SearchInput = ({ onChange, value, placeholder }: ISearch) => {
+const SearchInput = ({ onChange, value, placeholder }: ISearchInput) => {
 	return (
 		<div className={styles.SearchInput}>
 			<img src={searchIcon} alt="" className={styles.icon} />

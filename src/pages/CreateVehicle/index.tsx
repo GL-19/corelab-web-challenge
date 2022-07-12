@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ReturnIcon, VehicleForm } from "../../components";
+import { Header, VehicleForm } from "../../components";
 import { useVehicles } from "../../providers/VehiclesProvider";
 import styles from "./CreateVehicle.module.scss";
 
@@ -9,12 +9,8 @@ function CreateVehicle() {
 
 	return (
 		<div className={styles.CreateVehicle}>
-			<header>
-				<ReturnIcon onClick={() => navigate("/")} />
-			</header>
-			<main className={styles.main}>
-				<VehicleForm onSubmit={handleCreateVehicle} />
-			</main>
+			<Header onClick={() => navigate("/")} />
+			<VehicleForm onSubmit={handleCreateVehicle} />
 		</div>
 	);
 }
