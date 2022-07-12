@@ -2,7 +2,7 @@ import { useVehicles } from "../../providers/VehiclesProvider";
 import { SearchButton, Card, SearchInput, FilterIcon, Header } from "../../components";
 import styles from "./Vehicles.module.scss";
 import { useNavigate } from "react-router-dom";
-import { ChangeEvent, useMemo } from "react";
+import { ChangeEvent } from "react";
 
 const VehiclesPage = () => {
 	const navigate = useNavigate();
@@ -10,22 +10,12 @@ const VehiclesPage = () => {
 		search,
 		vehicles,
 		favoriteVehicles,
-		filterOptions,
+		isFilterActive,
 		handleSearch,
 		handleDeleteVehicle,
 		handleToggleFavorite,
 		handleResetSearchAndFilter,
 	} = useVehicles();
-
-	const isFilterActive = useMemo(() => {
-		for (let option in filterOptions) {
-			if (filterOptions[option]) {
-				return true;
-			}
-		}
-
-		return false;
-	}, [filterOptions]);
 
 	const displayFavoritesSection = favoriteVehicles.length > 0;
 

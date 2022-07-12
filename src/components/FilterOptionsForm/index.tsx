@@ -38,8 +38,6 @@ const FilterOptionsForm = () => {
 			filterOptions.maxPrice = Number(filterOptions.maxPrice);
 		}
 
-		console.log(filterOptions);
-
 		handleUpdateFilterOptions(filterOptions);
 	}
 

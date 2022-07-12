@@ -22,6 +22,7 @@ interface VehiclesContextData {
 	search: string;
 	vehicles: IVehicle[];
 	favoriteVehicles: IVehicle[];
+	isFilterActive: boolean;
 	handleSearch: (search: string) => void;
 	handleUpdateFilterOptions: (filterOptions: IFilterOptions) => void;
 	handleCreateVehicle: (CreateVehicleData: IVehicleFormData) => Promise<void>;
@@ -45,6 +46,7 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 	const [favoriteVehicles, setFavoriteVehicles] = useState<IVehicle[]>([]);
 	const [filterOptions, setFilterOptions] =
 		useState<IFilterOptions>(initialFilterOptions);
+	const [isFilterActive, setFilterActive] = useState(false);
 
 	useEffect(() => {
 		const fetchVehicles = async () => {
@@ -59,10 +61,21 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 	useEffect(() => {
 		const favoriteVehicles = vehicles.filter((vehicle) => vehicle.isFavorite);
 
-		console.log(favoriteVehicles);
-
 		setFavoriteVehicles(favoriteVehicles);
 	}, [vehicles]);
+
+	useEffect(() => {
+		let isFilterActive = false;
+
+		for (let option in filterOptions) {
+			if (filterOptions[option]) {
+				isFilterActive = true;
+				break;
+			}
+		}
+
+		setFilterActive(isFilterActive);
+	}, [filterOptions]);
 
 	async function handleUpdateFilterOptions(filterOptions: IFilterOptions): Promise<void> {
 		try {
@@ -159,6 +172,7 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 				search,
 				vehicles,
 				favoriteVehicles,
+				isFilterActive,
 				handleUpdateFilterOptions,
 				handleSearch,
 				handleCreateVehicle,
