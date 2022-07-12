@@ -25,8 +25,8 @@ interface VehiclesContextData {
 	handleUpdateFilterOptions: (filterOptions: IFilterOptions) => void;
 	handleCreateVehicle: (CreateVehicleData: IVehicleFormData) => Promise<void>;
 	handleUpdateVehicle: (UpdateVehicleData: IVehicleFormData) => Promise<void>;
-	handleDeleteVehicle: (id: number) => Promise<void>;
-	handleToggleFavorite: (id: number) => Promise<void>;
+	handleDeleteVehicle: (id: string) => Promise<void>;
+	handleToggleFavorite: (id: string) => Promise<void>;
 	handleResetSearchAndFilter: () => Promise<void>;
 }
 
@@ -112,7 +112,7 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 		}
 	}
 
-	async function handleDeleteVehicle(id: number): Promise<void> {
+	async function handleDeleteVehicle(id: string): Promise<void> {
 		try {
 			await deleteVehicle(id);
 
@@ -124,7 +124,7 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 		}
 	}
 
-	async function handleToggleFavorite(id: number): Promise<void> {
+	async function handleToggleFavorite(id: string): Promise<void> {
 		try {
 			await toggleVehicleFavorite(id);
 

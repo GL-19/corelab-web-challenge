@@ -11,11 +11,11 @@ export function createVehicle(data: IVehicleFormData): Promise<AxiosResponse> {
 	return api.post<IVehicle>("/vehicles", data);
 }
 
-export function deleteVehicle(id: number): Promise<AxiosResponse> {
+export function deleteVehicle(id: string): Promise<AxiosResponse> {
 	return api.delete<void>(`vehicles/${id}`);
 }
 
-export function getVehicle(id: number): Promise<AxiosResponse> {
+export function getVehicle(id: string): Promise<AxiosResponse> {
 	return api.get<IVehicle>(`vehicles/${id}`);
 }
 
@@ -31,13 +31,13 @@ export function getVehicles(
 	});
 }
 
-export function toggleVehicleFavorite(id: number): Promise<AxiosResponse> {
+export function toggleVehicleFavorite(id: string): Promise<AxiosResponse> {
 	return api.patch<IVehicle>(`/vehicles/${id}`);
 }
 
 export function updateVehicle(
 	data: IVehicleFormData,
-	id: number
+	id: string
 ): Promise<AxiosResponse> {
 	return api.put<IVehicle>(`/vehicles/${id}`, data);
 }

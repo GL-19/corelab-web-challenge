@@ -6,7 +6,7 @@ function RoutesComponent() {
 		<Routes>
 			<Route path="/" element={<VehiclesPage />}></Route>
 			<Route path="/create" element={<CreateVehicle />}></Route>
-			<Route path="/:id/update" element={<UpdateVehicle />}></Route>
+			<Route path="/update/:id" element={<UpdateVehicle />}></Route>
 			<Route path="/filter-options" element={<FilterOptions />}></Route>
 		</Routes>
 	);

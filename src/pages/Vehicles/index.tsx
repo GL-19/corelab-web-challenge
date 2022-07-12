@@ -39,7 +39,7 @@ const VehiclesPage = () => {
 					<Card
 						key={vehicle.id}
 						vehicle={vehicle}
-						onClickEdit={() => navigate(`/${vehicle.id}/update`)}
+						onClickEdit={() => navigate(`/update/${vehicle.id}`)}
 						onClickDelete={() => handleDeleteVehicle(vehicle.id)}
 						onClickFavorite={() => handleToggleFavorite(vehicle.id)}
 					/>

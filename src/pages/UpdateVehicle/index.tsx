@@ -17,7 +17,7 @@ export function UpdateVehicle() {
 	useEffect(() => {
 		async function fetchVehicle() {
 			try {
-				const { data } = await getVehicle(Number(id));
+				const { data } = await getVehicle(id);
 
 				setVehicle(data);
 			} catch {
