@@ -21,6 +21,7 @@ interface VehiclesContextData {
 	filterOptions: IFilterOptions;
 	search: string;
 	vehicles: IVehicle[];
+	favoriteVehicles: IVehicle[];
 	handleSearch: (search: string) => void;
 	handleUpdateFilterOptions: (filterOptions: IFilterOptions) => void;
 	handleCreateVehicle: (CreateVehicleData: IVehicleFormData) => Promise<void>;
@@ -41,6 +42,7 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 
 	const [search, setSearch] = useState<string>("");
 	const [vehicles, setVehicles] = useState<IVehicle[]>([]);
+	const [favoriteVehicles, setFavoriteVehicles] = useState<IVehicle[]>([]);
 	const [filterOptions, setFilterOptions] =
 		useState<IFilterOptions>(initialFilterOptions);
 
@@ -53,6 +55,14 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 
 		fetchVehicles();
 	}, []);
+
+	useEffect(() => {
+		const favoriteVehicles = vehicles.filter((vehicle) => vehicle.isFavorite);
+
+		console.log(favoriteVehicles);
+
+		setFavoriteVehicles(favoriteVehicles);
+	}, [vehicles]);
 
 	async function handleUpdateFilterOptions(filterOptions: IFilterOptions): Promise<void> {
 		try {
@@ -148,6 +158,7 @@ export function VehiclesProvider({ children }: VehiclesProviderProps) {
 				filterOptions,
 				search,
 				vehicles,
+				favoriteVehicles,
 				handleUpdateFilterOptions,
 				handleSearch,
 				handleCreateVehicle,

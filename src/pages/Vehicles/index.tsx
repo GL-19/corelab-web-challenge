@@ -9,6 +9,7 @@ const VehiclesPage = () => {
 	const {
 		search,
 		vehicles,
+		favoriteVehicles,
 		filterOptions,
 		handleSearch,
 		handleDeleteVehicle,
@@ -26,10 +27,13 @@ const VehiclesPage = () => {
 		return false;
 	}, [filterOptions]);
 
+	const displayFavoritesSection = favoriteVehicles.length > 0;
+
+	const displayAnnouncementTitle =
+		favoriteVehicles.length > 0 && vehicles.length > favoriteVehicles.length;
+
 	async function handleOnChange(event: ChangeEvent<HTMLInputElement>): Promise<void> {
 		event.preventDefault();
-
-		console.log(event.target.value);
 
 		handleSearch(event.target.value);
 	}
@@ -48,16 +52,38 @@ const VehiclesPage = () => {
 
 			<SearchButton onClick={() => navigate("/create")}>ADICIONAR</SearchButton>
 
+			{displayFavoritesSection && (
+				<div className={styles.cardsDiv}>
+					<h2>Meus favoritos</h2>
+
+					{vehicles
+						.filter((vehicle) => vehicle.isFavorite)
+						.map((vehicle) => (
+							<Card
+								key={vehicle.id}
+								vehicle={vehicle}
+								onClickEdit={() => navigate(`/update/${vehicle.id}`)}
+								onClickDelete={() => handleDeleteVehicle(vehicle.id)}
+								onClickFavorite={() => handleToggleFavorite(vehicle.id)}
+							/>
+						))}
+				</div>
+			)}
+
 			<div className={styles.cardsDiv}>
-				{vehicles.map((vehicle) => (
-					<Card
-						key={vehicle.id}
-						vehicle={vehicle}
-						onClickEdit={() => navigate(`/update/${vehicle.id}`)}
-						onClickDelete={() => handleDeleteVehicle(vehicle.id)}
-						onClickFavorite={() => handleToggleFavorite(vehicle.id)}
-					/>
-				))}
+				{displayAnnouncementTitle && <h2>Anúncios</h2>}
+
+				{vehicles
+					.filter((vehicle) => !vehicle.isFavorite)
+					.map((vehicle) => (
+						<Card
+							key={vehicle.id}
+							vehicle={vehicle}
+							onClickEdit={() => navigate(`/update/${vehicle.id}`)}
+							onClickDelete={() => handleDeleteVehicle(vehicle.id)}
+							onClickFavorite={() => handleToggleFavorite(vehicle.id)}
+						/>
+					))}
 			</div>
 		</main>
 	);
