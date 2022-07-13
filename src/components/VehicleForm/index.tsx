@@ -71,7 +71,7 @@ const VehicleForm = ({ onSubmit, initialValues = defaultValues }: VehicleFormPro
 			<label htmlFor="color">Cor:</label>
 			<FormSelect {...register("color")}>
 				{colorOptions.map((colorOption) => (
-					<option key={colorOption.name} value={colorOption.color}>
+					<option key={colorOption.name} value={colorOption.name}>
 						{colorOption.name}
 					</option>
 				))}

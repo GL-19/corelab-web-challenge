@@ -3,6 +3,7 @@ import EditIcon from "../Icons/EditIcon";
 import FavoriteIcon from "../Icons/FavoriteIcon";
 import { IVehicle } from "../../types";
 import { CardContainer, IconsContainer } from "./styles";
+import { colors } from "../../utils";
 
 interface CardProps {
 	onClickEdit: () => void;
@@ -17,10 +18,12 @@ export default function Card({
 	onClickEdit,
 	vehicle,
 }: CardProps) {
+	console.log(colors[vehicle.color.toLocaleLowerCase()]);
+
 	return (
 		<CardContainer
-			darkFontColor={vehicle.color === "#FFFFFF" ? true : false}
-			backgroundColor={vehicle.color ? vehicle.color : "black"}
+			darkFontColor={vehicle.color.toLocaleLowerCase() === "branco" ? true : false}
+			backgroundColor={vehicle.color ? colors[vehicle.color.toLocaleLowerCase()] : "red"}
 		>
 			<IconsContainer>
 				<EditIcon onClick={onClickEdit} />

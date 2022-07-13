@@ -1,54 +1,65 @@
 export const colorOptions = [
 	{
-		name: "Amarelo",
+		name: "AMARELO",
 		color: "#FFFF00",
 	},
 	{
-		name: "Azul",
+		name: "AZUL",
 		color: "#0000FF",
 	},
 	{
-		name: "Azul Claro",
-		color: "#ADD8E6",
-	},
-	{
-		name: "Branco",
+		name: "BRANCO",
 		color: "#FFFFFF",
 	},
 	{
-		name: "Cinza",
+		name: "CINZA",
 		color: "#808080",
 	},
 	{
-		name: "Laranja",
+		name: "LARANJA",
 		color: "#FFA500",
 	},
 	{
-		name: "Marron",
+		name: "MARRON",
 		color: "#8B4513",
 	},
 	{
-		name: "Ouro",
+		name: "OURO",
 		color: "#FFD700",
 	},
 	{
-		name: "Prata",
+		name: "PRATA",
 		color: "#C0C0C0",
 	},
 	{
-		name: "Preto",
+		name: "PRETO",
 		color: "#000000",
 	},
 	{
-		name: "Rosa",
+		name: "ROSA",
 		color: "#FF1493",
 	},
 	{
-		name: "Verde",
+		name: "VERDE",
 		color: "#008000",
 	},
 	{
-		name: "Vermelho",
+		name: "VERMELHO",
 		color: "#FF0000",
 	},
 ];
+
+export const colors = {
+	amarelo: "#FFFF00",
+	azul: "#0000FF",
+	branco: "#FFFFFF",
+	cinza: "#808080",
+	laranja: "#FFA500",
+	marron: "#8B4513",
+	ouro: "#FFD700",
+	prata: "#C0C0C0",
+	preto: "#000000",
+	rosa: "#FF1493",
+	verde: "#008000",
+	vermelho: "#FF0000",
+};

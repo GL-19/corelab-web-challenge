@@ -61,7 +61,7 @@ const FilterOptionsForm = () => {
 			<FormSelect {...register("color")}>
 				<option value=""></option>
 				{colorOptions.map((colorOption) => (
-					<option key={colorOption.name} value={colorOption.color}>
+					<option key={colorOption.name} value={colorOption.name}>
 						{colorOption.name}
 					</option>
 				))}
