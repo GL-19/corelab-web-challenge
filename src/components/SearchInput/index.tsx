@@ -1,6 +1,7 @@
 import { ChangeEvent } from "react";
-import styles from "./SearchInput.module.scss";
+
 import searchIcon from "../../images/search.svg";
+import { SearchInputContainer } from "./styles";
 
 interface ISearchInput {
 	value: string;
@@ -10,11 +11,11 @@ interface ISearchInput {
 
 const SearchInput = ({ onChange, value, placeholder }: ISearchInput) => {
 	return (
-		<div className={styles.SearchInput}>
-			<img src={searchIcon} alt="" className={styles.icon} />
+		<SearchInputContainer>
+			<img src={searchIcon} alt="search-icon" />
 
 			<input type="text" placeholder={placeholder} value={value} onChange={onChange} />
-		</div>
+		</SearchInputContainer>
 	);
 };
 

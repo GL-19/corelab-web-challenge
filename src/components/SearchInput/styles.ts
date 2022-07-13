@@ -1,6 +1,6 @@
-@import "../../styles/theme.scss";
+import styled from "styled-components";
 
-.SearchInput {
+export const SearchInputContainer = styled.div`
 	display: flex;
 	align-items: center;
 	position: relative;
@@ -20,10 +20,10 @@
 		background-color: rgba(101, 220, 199, 0.3);
 	}
 
-	.icon {
+	img {
 		width: 1.5rem;
 		height: 1.5rem;
 		position: absolute;
 		left: 1.5rem;
 	}
-}
+`;
