@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+
 import { Header, VehicleForm } from "../../components";
 import { getVehicle } from "../../services/api";
 
 import { useVehicles } from "../../providers/VehiclesProvider";
 import { IVehicle } from "../../types";
-import styles from "./UpdateVehicle.module.scss";
+import { GenericPageContainer } from "../styles";
 
 export function UpdateVehicle() {
 	const { id } = useParams();
@@ -29,7 +30,7 @@ export function UpdateVehicle() {
 	}, [id, navigate]);
 
 	return (
-		<div className={styles.UpdateVehicle}>
+		<GenericPageContainer>
 			<Header onClick={() => navigate("/")} />
 
 			{vehicle && (
@@ -40,7 +41,7 @@ export function UpdateVehicle() {
 					}}
 				/>
 			)}
-		</div>
+		</GenericPageContainer>
 	);
 }
 

@@ -1,16 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { FilterOptionsForm, Header } from "../../components";
-
-import styles from "./FilterOptions.module.scss";
+import { GenericPageContainer } from "../styles";
 
 export function FilterOptions() {
 	const navigate = useNavigate();
 
 	return (
-		<div className={styles.FilterOptions}>
+		<GenericPageContainer>
 			<Header onClick={() => navigate("/")} />
 
 			<FilterOptionsForm />
-		</div>
+		</GenericPageContainer>
 	);
 }

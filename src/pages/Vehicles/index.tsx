@@ -1,8 +1,9 @@
 import { useVehicles } from "../../providers/VehiclesProvider";
 import { SearchButton, Card, SearchInput, FilterIcon, Header } from "../../components";
-import styles from "./Vehicles.module.scss";
+
 import { useNavigate } from "react-router-dom";
 import { ChangeEvent } from "react";
+import { VehiclesPageContainer, SearchContainer, CardsContainer } from "./styles";
 
 const VehiclesPage = () => {
 	const navigate = useNavigate();
@@ -29,21 +30,21 @@ const VehiclesPage = () => {
 	}
 
 	return (
-		<main className={styles.Vehicles}>
+		<VehiclesPageContainer>
 			<Header
 				onClick={handleResetSearchAndFilter}
 				displayButton={!!search || isFilterActive}
 			/>
 
-			<div className={styles.searchDiv}>
+			<SearchContainer>
 				<SearchInput placeholder="Buscar" value={search} onChange={handleOnChange} />
 				<FilterIcon onClick={() => navigate("/filter-options")} />
-			</div>
+			</SearchContainer>
 
 			<SearchButton onClick={() => navigate("/create")}>ADICIONAR</SearchButton>
 
 			{displayFavoritesSection && (
-				<div className={styles.cardsDiv}>
+				<CardsContainer>
 					<h2>Meus favoritos</h2>
 
 					{vehicles
@@ -57,10 +58,10 @@ const VehiclesPage = () => {
 								onClickFavorite={() => handleToggleFavorite(vehicle.id)}
 							/>
 						))}
-				</div>
+				</CardsContainer>
 			)}
 
-			<div className={styles.cardsDiv}>
+			<CardsContainer>
 				{displayAnnouncementTitle && <h2>Anúncios</h2>}
 
 				{vehicles
@@ -74,8 +75,8 @@ const VehiclesPage = () => {
 							onClickFavorite={() => handleToggleFavorite(vehicle.id)}
 						/>
 					))}
-			</div>
-		</main>
+			</CardsContainer>
+		</VehiclesPageContainer>
 	);
 };
 
