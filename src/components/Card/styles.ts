@@ -2,13 +2,14 @@ import styled from "styled-components";
 
 interface ICardContainerProps {
 	backgroundColor: string;
+	darkFontColor?: boolean;
 }
 
 export const CardContainer = styled.div<ICardContainerProps>`
 	width: 80%;
 	padding: 1.5rem;
 
-	color: #ffffff;
+	color: ${({ darkFontColor }) => (darkFontColor ? "#020202" : "#ffffff")};
 	text-align: left;
 	text-decoration: none;
 

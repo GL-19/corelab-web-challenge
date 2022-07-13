@@ -18,7 +18,10 @@ export default function Card({
 	vehicle,
 }: CardProps) {
 	return (
-		<CardContainer backgroundColor={vehicle.color ? vehicle.color : "black"}>
+		<CardContainer
+			darkFontColor={vehicle.color === "#FFFFFF" ? true : false}
+			backgroundColor={vehicle.color ? vehicle.color : "black"}
+		>
 			<IconsContainer>
 				<EditIcon onClick={onClickEdit} />
 				<DeleteIcon onClick={onClickDelete} />
