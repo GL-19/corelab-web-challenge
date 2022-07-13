@@ -1,13 +1,22 @@
-.Card {
-	width: 80%;
+import styled from "styled-components";
 
+interface ICardContainerProps {
+	backgroundColor: string;
+}
+
+export const CardContainer = styled.div<ICardContainerProps>`
+	width: 80%;
 	padding: 1.5rem;
 
-	text-align: left;
 	color: #ffffff;
+	text-align: left;
 	text-decoration: none;
+
+	background-color: ${(props) => props.backgroundColor};
+
 	border: 1px solid #eaeaea;
 	border-radius: 10px;
+
 	transition: color 0.15s ease, border-color 0.15s ease;
 
 	&:hover,
@@ -32,12 +41,12 @@
 	@media screen and (min-width: 420px) {
 		max-width: 18rem;
 	}
-}
+`;
 
-.IconsDiv {
+export const IconsContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
 
 	width: 4rem;
 	height: 2.5rem;
-}
+`;
