@@ -18,12 +18,10 @@ export default function Card({
 	onClickEdit,
 	vehicle,
 }: CardProps) {
-	console.log(colors[vehicle.color.toLocaleLowerCase()]);
-
 	return (
 		<CardContainer
-			darkFontColor={vehicle.color.toLocaleLowerCase() === "branco" ? true : false}
-			backgroundColor={vehicle.color ? colors[vehicle.color.toLocaleLowerCase()] : "red"}
+			darkFontColor={vehicle.color === "BRANCO" ? true : false}
+			backgroundColor={vehicle.color ? colors[vehicle.color] : "red"}
 		>
 			<IconsContainer>
 				<EditIcon onClick={onClickEdit} />

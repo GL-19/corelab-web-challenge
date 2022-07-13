@@ -49,17 +49,10 @@ export const colorOptions = [
 	},
 ];
 
-export const colors = {
-	amarelo: "#FFFF00",
-	azul: "#0000FF",
-	branco: "#FFFFFF",
-	cinza: "#808080",
-	laranja: "#FFA500",
-	marron: "#8B4513",
-	ouro: "#FFD700",
-	prata: "#C0C0C0",
-	preto: "#000000",
-	rosa: "#FF1493",
-	verde: "#008000",
-	vermelho: "#FF0000",
-};
+const colors = {};
+
+for (let color of colorOptions) {
+	colors[color.name] = color.color;
+}
+
+export { colors };
