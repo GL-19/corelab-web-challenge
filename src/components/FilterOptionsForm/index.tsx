@@ -8,7 +8,7 @@ import { IFilterOptions } from "../../types";
 
 import { colorOptions, brandOptions, yearOptions } from "../../utils";
 
-import styles from "./FilterOptionsForm.module.scss";
+import { Form } from "./styles";
 
 const schema = yup.object().shape({
 	brand: yup.string(),
@@ -42,11 +42,7 @@ const FilterOptionsForm = () => {
 	}
 
 	return (
-		<form
-			className={styles.FilterOptionsForm}
-			action="submit"
-			onSubmit={handleSubmit(onSubmitHandle)}
-		>
+		<Form action="submit" onSubmit={handleSubmit(onSubmitHandle)}>
 			<label htmlFor="brand">Marca:</label>
 			<FormSelect {...register("brand")}>
 				<option value=""></option>
@@ -86,10 +82,8 @@ const FilterOptionsForm = () => {
 			<FormInput {...register("maxPrice")} type="number" />
 			<p>{errors.maxPrice?.message}</p>
 
-			<div className={styles.buttondiv}>
-				<SubmitButton type="submit">Salvar</SubmitButton>
-			</div>
-		</form>
+			<SubmitButton type="submit">Salvar</SubmitButton>
+		</Form>
 	);
 };
 
