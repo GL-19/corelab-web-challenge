@@ -5,8 +5,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { IVehicleFormData } from "../../types";
 import { yearOptions, colorOptions, brandOptions } from "../../utils";
 
-import styles from "./VehicleForm.module.scss";
 import { SubmitButton, FormInput, FormSelect } from "..";
+import { Form } from "./styles";
 
 interface VehicleFormProps {
 	initialValues?: IVehicleFormData;
@@ -48,11 +48,7 @@ const VehicleForm = ({ onSubmit, initialValues = defaultValues }: VehicleFormPro
 	}
 
 	return (
-		<form
-			className={styles.VehicleForm}
-			action="submit"
-			onSubmit={handleSubmit(onSubmitHandle)}
-		>
+		<Form action="submit" onSubmit={handleSubmit(onSubmitHandle)}>
 			<label htmlFor="Name">Nome:</label>
 			<FormInput type="text" required {...register("name")} />
 
@@ -97,10 +93,8 @@ const VehicleForm = ({ onSubmit, initialValues = defaultValues }: VehicleFormPro
 			<label htmlFor="price">Preço:</label>
 			<FormInput type="number" required {...register("price")} />
 
-			<div className={styles.buttondiv}>
-				<SubmitButton type="submit">Salvar</SubmitButton>
-			</div>
-		</form>
+			<SubmitButton type="submit">Salvar</SubmitButton>
+		</Form>
 	);
 };
 
