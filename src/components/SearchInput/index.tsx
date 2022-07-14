@@ -1,6 +1,6 @@
 import { ChangeEvent } from "react";
 
-import searchIcon from "../../images/search.svg";
+import searchIcon from "../../../images/search.svg";
 import { SearchInputContainer } from "./styles";
 
 interface ISearchInput {
