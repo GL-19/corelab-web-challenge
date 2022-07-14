@@ -2,11 +2,14 @@ import Card from "./Card";
 import SearchInput from "./SearchInput";
 import VehicleForm from "./VehicleForm";
 import FilterOptionsForm from "./FilterOptionsForm";
-import FavoriteIcon from "./Icons/FavoriteIcon";
-import DeleteIcon from "./Icons/DeleteIcon";
-import EditIcon from "./Icons/EditIcon";
-import FilterIcon from "./Icons/FilterIcon";
-import ReturnIcon from "./Icons/ReturnIcon";
+import {
+	FavoriteIcon,
+	DeleteIcon,
+	EditIcon,
+	ReturnIcon,
+	Icon,
+	FilterIcon,
+} from "./Icons";
 import { SearchButton, SubmitButton } from "./Buttons";
 import { FormInput } from "./FormInput";
 import { FormSelect } from "./FormSelect";
@@ -27,4 +30,5 @@ export {
 	EditIcon,
 	FilterIcon,
 	ReturnIcon,
+	Icon,
 };

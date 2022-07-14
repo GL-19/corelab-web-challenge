@@ -1,6 +1,4 @@
-import DeleteIcon from "../Icons/DeleteIcon";
-import EditIcon from "../Icons/EditIcon";
-import FavoriteIcon from "../Icons/FavoriteIcon";
+import { FavoriteIcon, DeleteIcon, EditIcon } from "..";
 import { IVehicle } from "../../types";
 import { CardContainer, IconsContainer } from "./styles";
 import { colors } from "../../utils";
