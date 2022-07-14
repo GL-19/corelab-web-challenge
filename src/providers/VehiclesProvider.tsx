@@ -7,7 +7,7 @@ import {
 	toggleVehicleFavorite,
 	updateVehicle,
 } from "../services/api";
-import { IFilterOptions, IVehicleFormData, IVehicle } from "../types";
+import { IFilterOptions, IVehicleFormData, IVehicle } from "../shared/types";
 
 const initialFilterOptions: IFilterOptions = {
 	brand: "",

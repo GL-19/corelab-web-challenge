@@ -5,7 +5,7 @@ import { Header, VehicleForm } from "../../components";
 import { getVehicle } from "../../services/api";
 
 import { useVehicles } from "../../providers/VehiclesProvider";
-import { IVehicle } from "../../types";
+import { IVehicle } from "../../shared/types";
 import { GenericPageContainer } from "../styles";
 
 export function UpdateVehicle() {

@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { IVehicleFormData, IVehicle, IFilterOptions } from "../types";
+import { IVehicleFormData, IVehicle, IFilterOptions } from "../shared/types";
 
 const baseURL = "http://localhost:3333";
 

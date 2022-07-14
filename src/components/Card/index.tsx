@@ -1,7 +1,7 @@
 import { FavoriteIcon, DeleteIcon, EditIcon } from "..";
-import { IVehicle } from "../../types";
+import { IVehicle } from "../../shared/types";
 import { CardContainer, IconsContainer } from "./styles";
-import { colors } from "../../utils";
+import { colors } from "../../shared/constants";
 
 interface CardProps {
 	onClickEdit: () => void;

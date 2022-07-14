@@ -2,8 +2,8 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { IVehicleFormData } from "../../types";
-import { yearOptions, colorOptions, brandOptions } from "../../utils";
+import { IVehicleFormData } from "../../shared/types";
+import { yearOptions, colorOptions, brandOptions } from "../../shared/constants";
 
 import { SubmitButton, FormInput, FormSelect } from "..";
 import { Form } from "./styles";

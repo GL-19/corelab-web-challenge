@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import deleteIcon from "../../images/delete.svg";
-import editIcon from "../../images/edit.svg";
-import arrowIcon from "../../images/arrow-left.svg";
-import heartEmptyIcon from "../../images/heart-empty.svg";
-import heartFilledIcon from "../../images/heart-filled.svg";
-import filterIcon from "../../images/filter.svg";
+import deleteIcon from "../../shared/images/delete.svg";
+import editIcon from "../../shared/images/edit.svg";
+import arrowIcon from "../../shared/images/arrow-left.svg";
+import heartEmptyIcon from "../../shared/images/heart-empty.svg";
+import heartFilledIcon from "../../shared/images/heart-filled.svg";
+import filterIcon from "../../shared/images/filter.svg";
 
 export interface IIconProps {
 	onClick: () => void;

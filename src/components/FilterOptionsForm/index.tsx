@@ -4,9 +4,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { SubmitButton, FormInput, FormSelect } from "..";
 import { useVehicles } from "../../providers/VehiclesProvider";
-import { IFilterOptions } from "../../types";
+import { IFilterOptions } from "../../shared/types";
 
-import { colorOptions, brandOptions, yearOptions } from "../../utils";
+import { colorOptions, brandOptions, yearOptions } from "../../shared/constants";
 
 import { Form } from "./styles";
 
